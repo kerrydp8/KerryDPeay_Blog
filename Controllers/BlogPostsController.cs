@@ -121,19 +121,27 @@ namespace KerryDPeay_Blog.Controllers
         [ValidateAntiForgeryToken]
 
         //public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
-        public ActionResult Edit([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
-                //var newSlug = StringUtilities.MakeSlug(blogPost.title);
+                var newSlug = StringUtilities.URLFriendly(blogPost.Title);
 
-                //if (newSlug != blogPost.Slug)
+                if (newSlug != blogPost.Slug)
 
-                //blogPost.Updated = DateTimeOffset.Now;
+                    if (String.IsNullOrWhiteSpace(newSlug))
+                    {
+                        ModelState.AddModelError("Title", "Invalid title");
+                        return View(blogPost);
+                    }
 
-                db.Entry(blogPost).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.BlogPosts.Any(p => p.Slug == newSlug))
+                {
+                    ModelState.AddModelError("Title", "The title must be unique");
+                    return View(blogPost);
+                }
+
+                blogPost.Slug = newSlug;
             }
             return View(blogPost);
         }
