@@ -107,7 +107,9 @@ namespace KerryDPeay_Blog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             BlogPost blogPost = db.BlogPosts.Find(id);
+
             if (blogPost == null)
             {
                 return HttpNotFound();
@@ -122,13 +124,14 @@ namespace KerryDPeay_Blog.Controllers
         [ValidateAntiForgeryToken]
 
         //public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
-        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Created,Updated")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
                 var newSlug = StringUtilities.MakeSlug(blogPost.Title);
 
                 if (newSlug != blogPost.Slug)
+                {
 
                     if (String.IsNullOrWhiteSpace(newSlug))
                     {
@@ -136,15 +139,18 @@ namespace KerryDPeay_Blog.Controllers
                         return View(blogPost);
                     }
 
-                if (db.BlogPosts.Any(p => p.Slug == newSlug))
-                {
-                    ModelState.AddModelError("Title", "The title must be unique");
-                    return View(blogPost);
-                }
 
-                blogPost.Slug = newSlug;
-            }
-            return View(blogPost);
+                    if (db.BlogPosts.Any(p => p.Slug == newSlug))
+                    {
+                        ModelState.AddModelError("Title", "The title must be unique");
+                        return View(blogPost);
+                    }
+                }
+                    //blogPost.Slug = newSlug;
+                    blogPost.Slug = newSlug;
+                }
+                return View(blogPost);
+            
         }
 
         // GET: BlogPosts/Delete/5
@@ -154,7 +160,9 @@ namespace KerryDPeay_Blog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             BlogPost blogPost = db.BlogPosts.Find(id);
+
             if (blogPost == null)
             {
                 return HttpNotFound();
