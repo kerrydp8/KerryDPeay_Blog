@@ -1,0 +1,75 @@
+﻿@model IEnumerable<KerryDPeay_Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abstract)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Published)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Create)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Update)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var post in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => post.Title) <!--(Item)-->
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Abstract) <!--(Item)-->
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.MediaURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Published)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Create)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Update)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = post.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = post.Id })
+        </td>
+    </tr>
+}
+
+</table>
