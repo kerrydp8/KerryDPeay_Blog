@@ -72,7 +72,7 @@ namespace KerryDPeay_Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Slug = StringUtilities.URLFriendly(blogPost.Title);
+                var Slug = StringUtilities.MakeSlug(blogPost.Title);
 
                 if (String.IsNullOrWhiteSpace(Slug))
                 {
@@ -125,7 +125,7 @@ namespace KerryDPeay_Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newSlug = StringUtilities.URLFriendly(blogPost.Title);
+                var newSlug = StringUtilities.MakeSlug(blogPost.Title);
 
                 if (newSlug != blogPost.Slug)
 

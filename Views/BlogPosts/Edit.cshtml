@@ -35,10 +35,10 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group text-center" id="editor">
             @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,8 +90,14 @@
     </script>
 
     <script type="text/javascript">
-                $(function () {
-                    tinymce.init({ selector: '#editor' });
-                });
+        $(function () {
+            tinymce.init({ selector: '#editor' });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            tinymce.init({ selector: 'textarea' });
+        });
     </script>
 }

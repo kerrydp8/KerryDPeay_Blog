@@ -11,7 +11,7 @@ namespace KerryDPeay_Blog.Helpers
 
     public class StringUtilities
     {
-        public static string URLFriendly(string title)
+        public static string MakeSlug(string title)
         {
             if (title == null) return "";
             const int maxlen = 80;
