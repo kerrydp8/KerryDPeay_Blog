@@ -68,7 +68,7 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,9 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
+
+        //public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {

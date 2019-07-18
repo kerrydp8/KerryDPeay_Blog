@@ -75,6 +75,10 @@
             @Html.DisplayFor(model => model.Update)
         </dd>
 
+        <dt>
+            @Html.Raw(Model.Body)
+        </dt>
+
     </dl>
 
     @using (Html.BeginForm()) {
