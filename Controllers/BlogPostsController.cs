@@ -91,7 +91,8 @@ namespace KerryDPeay_Blog.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                blogPost.Slug = Slug; blogPost.Create = DateTimeOffset.Now;
+                blogPost.Slug = Slug;
+                blogPost.Create = DateTimeOffset.Now;
                 db.BlogPosts.Add(blogPost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
