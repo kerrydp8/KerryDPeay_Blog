@@ -125,7 +125,8 @@ namespace KerryDPeay_Blog.Controllers
 
         //public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
         public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Created,Updated")] BlogPost blogPost)
-        {
+        { 
+      
             if (ModelState.IsValid)
             {
                 var newSlug = StringUtilities.MakeSlug(blogPost.Title);
@@ -139,18 +140,15 @@ namespace KerryDPeay_Blog.Controllers
                         return View(blogPost);
                     }
 
-
                     if (db.BlogPosts.Any(p => p.Slug == newSlug))
                     {
                         ModelState.AddModelError("Title", "The title must be unique");
                         return View(blogPost);
                     }
                 }
-                    //blogPost.Slug = newSlug;
                     blogPost.Slug = newSlug;
-                }
+            }
                 return View(blogPost);
-            
         }
 
         // GET: BlogPosts/Delete/5
