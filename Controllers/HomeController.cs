@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KerryDPeay_Blog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace KerryDPeay_Blog.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+            var publishedPosts = View(db.BlogPosts.Where(b => b.Published).ToList());
+            return View(publishedPosts);
         }
 
         public ActionResult About()
