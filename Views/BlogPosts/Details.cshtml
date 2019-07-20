@@ -4,7 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h1>@Model.Title</h1>
+
+<h2>@Model.Abstract</h2>
+
+<!--<h2>Details</h2>-->
 
 <div>
     <h4>BlogPost</h4>
@@ -74,6 +78,12 @@
             @Html.DisplayFor(model => model.Update)
         </dd>
 
+        <dd>
+            @Html.Raw(Model.Body)
+        </dd>
+        <dt>
+            @Html.Raw(Model.Body)
+        </dt>
     </dl>
 </div>
 <p>
