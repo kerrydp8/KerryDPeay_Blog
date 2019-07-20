@@ -57,7 +57,7 @@
                 @foreach (var post in Model)
                 {
                 <div class="post-preview">
-                    <a href="@Url.Action("Details", "BlogPosts", new { slug = @post.Slug })">
+                    <a href="@Url.Action("Details", "BlogPosts", new { id = post.Id })">
                         <!--<a href="post.html">-->
                         <h2 class="post-title">
                             @post.Title
