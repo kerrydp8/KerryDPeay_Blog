@@ -13,22 +13,7 @@
 <div>
     <!--<h4>BlogPost</h4>-->
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Abstract)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Abstract)
-        </dd>
+    <dl class="text-center">
 
         <dt>
             @Html.DisplayNameFor(model => model.Slug)
@@ -79,6 +64,7 @@
         </dd>
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
