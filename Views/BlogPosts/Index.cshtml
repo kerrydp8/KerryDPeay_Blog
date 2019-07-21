@@ -4,198 +4,153 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+
+  #scale {
+  background: url(https://img.freepik.com/vrije-vector/blauwe-abstracte-acryl-penseelstreek-gestructureerde-achtergrond_53876-86373.jpg?size=626&ext=jpg);
+  background-repeat: no-repeat;
+  background-size: 2000px 2000px ;
+}
+
+</style>
+
 <h2>Home</h2>
 
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="post.html">Sample Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
+<body id="scale">
+        <!-- Page Header -->
+        <header class="masthead" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReehi7ta0uTt8qp9ymu4HoG1dw6UReqNha5-ZP1BHphu26nsVkeQ')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="site-heading">
+                            <h1>Kerry Peay's Blog</h1>
+                            <!--<span class="subheading">A Blog Theme by Start Bootstrap</span>-->
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
-        <div class="overlay"></div>
+        <!-- Main Content -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <h1>Kerry Peay's Blog</h1>
-                        <!--<span class="subheading">A Blog Theme by Start Bootstrap</span>-->
+                    @foreach (var post in Model)
+                    {
+                        <div class="post-preview">
+                            <a href="@Url.Action("Details", "BlogPosts", new { id = post.Id })">
+                                <!--<a href="post.html">-->
+                                <!--<h2 class="post-title"> @post.Title </h2>-->
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
+
+                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = post.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = post.Id })
+                        </div>
+                        <hr>
+                    }
+                    <!-- Pager -->
+                    <div class="clearfix">
+                        <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->
                     </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                @foreach (var post in Model)
-                {
-                <div class="post-preview">
-                    <a href="@Url.Action("Details", "BlogPosts", new { id = post.Id })">
-                        <!--<a href="post.html">-->
-                        <h2 class="post-title">
-                            @post.Title
-                        </h2>
-                        <h3 class="post-subtitle">
-                            @post.Abstract
-                        </h3>
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#">Kerry Peay's Blog</a>
-                        on September 24, 2017
-                    </p>
+        <hr>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = post.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = post.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = post.Id })
-                </div>
-                    <hr>
-                }
-                <!-- Pager -->
-                <div class="clearfix">
-                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </footer>
 
-    <hr>
+        <!-- Bootstrap core JavaScript -->
+        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+        <!-- Custom scripts for this template -->
+        <!--<script src="js/clean-blog.min.js"></script>-->
+        <link href="~/Scripts/clean-blog.min.css" rel="stylesheet" />
+
+    </body>
+
+    <p>
+        <button class="btn btn-success">@Html.ActionLink("Create New", "Create")</button>
+    </p>
+
+<script>
+
+    /*
+             <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Kerry Peay's Blog</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="post.html">Sample Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </nav>
+     */
 
-    <!-- Bootstrap core JavaScript -->
-    <!--<script src="vendor/jquery/jquery.min.js"></script>-->
-    <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</script>
 
-    <!-- Custom scripts for this template -->
-    <!--<script src="js/clean-blog.min.js"></script>-->
-    <link href="~/Scripts/clean-blog.min.css" rel="stylesheet" />
-
-</body>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abstract)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Slug)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Published)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Create)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Update)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var post in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => post.Title) <!--(Item)-->
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Abstract) <!--(Item)-->
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Slug)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.MediaURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Published)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Create)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => post.Update)
-        </td>
-    </tr>
-}
-
-</table>
