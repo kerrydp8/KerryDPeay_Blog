@@ -16,6 +16,8 @@
 
 <h2 class="text-center">Delete This Post?</h2>
 
+
+
 <body id="scale">
 
     <div>
@@ -100,12 +102,13 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-danger" /> |
-                @Html.ActionLink("Back to List", "Index")
+            <div class="form-actions no-color text-center">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 
             </div>
         }
+
     </div>
 
 </body>
