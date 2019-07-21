@@ -17,7 +17,6 @@ namespace KerryDPeay_Blog.Models
         public string Slug { get; set; }
 
         [AllowHtml]
-
         public string Body { get; set; }
 
         public string MediaURL { get; set; }
