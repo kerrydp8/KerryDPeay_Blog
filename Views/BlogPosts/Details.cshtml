@@ -4,16 +4,25 @@
     ViewBag.Title = "Details";
 }
 
-<h1>@Model.Title</h1>
+    <style>
 
-<h2>@Model.Abstract</h2>
+        #scale {
+            background: url(https://img.freepik.com/vrije-vector/blauwe-abstracte-acryl-penseelstreek-gestructureerde-achtergrond_53876-86373.jpg?size=626&ext=jpg);
+            background-repeat: no-repeat;
+            background-size: 2000px 2000px;
+        }
+    </style>
+
+<h1><u>@Model.Title</u></h1>
+
+<h3>@Model.Abstract</h3>
 
 <!--<h2>Details</h2>-->
 
-<div>
+<body id="scale"><div>
     <!--<h4>BlogPost</h4>-->
     <hr />
-    <dl class="text-center">
+    <dl>
 
         <dt>
             @Html.DisplayNameFor(model => model.Slug)
@@ -63,9 +72,10 @@
             @Html.DisplayFor(model => model.Update)
         </dd>
     </dl>
-</div>
+</div></body>
+
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+    <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 </p>

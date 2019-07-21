@@ -4,13 +4,23 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<style>
+
+   #scale {
+       background: url(https://img.freepik.com/vrije-vector/blauwe-abstracte-acryl-penseelstreek-gestructureerde-achtergrond_53876-86373.jpg?size=626&ext=jpg);
+       background-repeat: no-repeat;
+       background-size: 2000px 2000px;
+        }
+</style>
+
+<h1 class="text-center"><u>Create New Post</u></h1>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+<body id="scale">
     <div class="form-horizontal">
         <!--<h4>BlogPost</h4>-->
         <hr />
@@ -34,8 +44,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger"})
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -53,14 +63,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
+</body>
+
+   
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 </div>
 
 @section Scripts {

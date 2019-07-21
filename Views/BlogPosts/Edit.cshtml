@@ -4,14 +4,23 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+    <style>
+
+        #scale {
+            background: url(https://img.freepik.com/vrije-vector/blauwe-abstracte-acryl-penseelstreek-gestructureerde-achtergrond_53876-86373.jpg?size=626&ext=jpg);
+            background-repeat: no-repeat;
+            background-size: 2000px 2000px;
+        }
+    </style>
+
+<h1 class="text-center"><u>Edit Post</u></h1>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+<body id="scale"><div class="form-horizontal">
     <!--<h4>BlogPost</h4>-->
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -88,14 +97,15 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
-</div>
+</div></body>
+
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 </div>
 
 @section Scripts {
