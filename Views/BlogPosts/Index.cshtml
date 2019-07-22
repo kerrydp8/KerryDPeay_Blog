@@ -34,10 +34,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
+                
                 @foreach (var post in Model)
                 {
                     <div class="post-preview">
-                        <a href="@Url.Action("Details", "BlogPosts", new { id = post.Id })">
+                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })"> <!--Searches for a particular post and returns its Details by Slug-->
                             <!--<a href="post.html">-->
                             <!--<h2 class="post-title"> @post.Title </h2>-->
                             <h3 class="post-subtitle">
@@ -56,6 +57,7 @@
                     </div>
                     <hr>
                 }
+
                 <!-- Pager -->
                 <div class="clearfix">
                     <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->

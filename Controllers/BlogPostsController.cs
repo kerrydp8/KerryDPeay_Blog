@@ -57,13 +57,13 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Create
+        // GET: BlogPosts/Create - This action (Http:Get) is returning a View to the Creation page, allowing the user to have access to it.
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BlogPosts/Create
+        // POST: BlogPosts/Create - This action (Http:Post) is returning the actual features of this View and allows the user to interact with the View. 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,16 +91,16 @@ namespace KerryDPeay_Blog.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                blogPost.Slug = Slug;
-                blogPost.Create = DateTimeOffset.Now;
-                db.BlogPosts.Add(blogPost);
+                blogPost.Slug = Slug; //Creates a new slug and stores it in a variable
+                blogPost.Create = DateTimeOffset.Now; //Stores the time in which the post is created. 
+                db.BlogPosts.Add(blogPost); //Adds the current post to the collection of posts. 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Edit/5
+        // GET: BlogPosts/Edit/5 - Returns the Edit View only for a particular post. This Action (Http:Get) searches for the post by its abstract and slug. 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,7 +130,7 @@ namespace KerryDPeay_Blog.Controllers
             {
                 var newSlug = StringUtilities.MakeSlug(blogPost.Title);
 
-                if (newSlug != blogPost.Slug)
+                if (newSlug != blogPost.Slug) //The slug is used to compare posts. If there is a matching slug in the collection, the user must pick a new title.
                 {
                     if (String.IsNullOrWhiteSpace(newSlug))
                     {
@@ -143,7 +143,7 @@ namespace KerryDPeay_Blog.Controllers
                         ModelState.AddModelError("Title", "The title must be unique");
                         return View(blogPost);
                     }
-                    blogPost.Slug = newSlug;
+                    blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
                 }
 
                 blogPost.Update = DateTimeOffset.Now;
@@ -154,7 +154,7 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Delete/5
+        // GET: BlogPosts/Delete/5 - Returns the View for the user
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -171,7 +171,7 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // POST: BlogPosts/Delete/5
+        // POST: BlogPosts/Delete/5 - The actual functionality of the View
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
