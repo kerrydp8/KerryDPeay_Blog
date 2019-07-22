@@ -18,7 +18,12 @@ namespace KerryDPeay_Blog.Controllers
         // GET: BlogPosts
         public ActionResult Index()
         {
-            return View(db.BlogPosts.Where(b => b.Published).ToList()); //Lists all of the posts in the order they were published
+            return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
+        }
+
+        public ActionResult AllPosts()
+        {
+            return View(db.BlogPosts.Where(b => b.Published).ToList());
         }
 
         [Authorize(Roles ="Admin")]
