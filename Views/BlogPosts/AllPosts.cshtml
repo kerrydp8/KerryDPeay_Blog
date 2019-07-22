@@ -55,6 +55,12 @@
                         <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
                             <!--Searches for a particular post and returns its Details by Slug-->
                             <!--<a href="post.html">-->
+
+                            @if (@post.MediaURL != null)
+                            {
+                                <img class="img-responsive" src="@post.MediaURL" alt="image">
+                            }
+
                             <h2 class="post-title"> @post.Title </h2>
                             <h3 class="post-subtitle">
                                 @post.Abstract

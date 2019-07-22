@@ -73,7 +73,7 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Id,Title,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +140,7 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "Id,Title,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -160,15 +160,16 @@ namespace KerryDPeay_Blog.Controllers
                         return View(blogPost);
                     }
 
+                    blogPost.Slug = newSlug;
+                    //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
+
                     if (ImageUploadValidator.IsWebFriendlyImage(image))
                     {
-
                         var fileName = Path.GetFileName(image.FileName);
-
-                        image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName)); blogPost.MediaURL = "/Uploads/" + fileName;
+                        image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                        blogPost.MediaURL = "/Uploads/" + fileName;
                     }
-
-                    blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
+               
                 }
 
                 blogPost.Update = DateTime.Now;

@@ -27,6 +27,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.Slug)
+            @Html.HiddenFor(model => model.MediaURL)
             @Html.HiddenFor(model => model.Create)
 
             <div class="form-group">
@@ -74,7 +75,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input name ="image" type="file" class="form-control" id="fileUpload" />
+                    <input name="image" type="file" class="form-control" id="fileUpload" />
                     @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -99,8 +100,8 @@
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-primary" />
                     <!--Returns the Edit view for the post but upon click, the Create action is used.
-                        A new title and slug are created and stored, leading to this post replacing
-                        the former post instead of being added on top.-->
+                A new title and slug are created and stored, leading to this post replacing
+                the former post instead of being added on top.-->
                 </div>
             </div>
         </div>
