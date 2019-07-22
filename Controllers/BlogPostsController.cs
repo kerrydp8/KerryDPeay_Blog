@@ -97,7 +97,7 @@ namespace KerryDPeay_Blog.Controllers
                 }
 
                 blogPost.Slug = Slug; //Creates a new slug and stores it in a variable
-                blogPost.Create = DateTimeOffset.Now; //Stores the time in which the post is created. 
+                blogPost.Create = DateTime.Now; //Stores the time in which the post is created. 
                 db.BlogPosts.Add(blogPost); //Adds the current post to the collection of posts. 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -152,7 +152,7 @@ namespace KerryDPeay_Blog.Controllers
                     blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
                 }
 
-                blogPost.Update = DateTimeOffset.Now;
+                blogPost.Update = DateTime.Now;
                 db.Entry(blogPost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
