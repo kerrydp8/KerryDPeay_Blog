@@ -57,13 +57,13 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Create - This action (Http:Get) is returning a View to the Creation page, allowing the user to have access to it.
+        // GET: BlogPosts/Create - This action (Http:Get) is returning a View to the Creation page.
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BlogPosts/Create - This action (Http:Post) is returning the actual features of this View and allows the user to interact with the View. 
+        // POST: BlogPosts/Create - This action (Http:Post) allows the user to create data from the View and send it to the database. 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -100,7 +100,8 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Edit/5 - Returns the Edit View only for a particular post. This Action (Http:Get) searches for the post by its abstract and slug. 
+        // GET: BlogPosts/Edit/5 - Returns the Edit View only for a particular post. This Action (Http:Get) searches for the post in the 
+        //database. 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -154,7 +155,7 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Delete/5 - Returns the View for the user
+        // GET: BlogPosts/Delete/5 - Returns the select post from the database for the user to delete (or not).
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -171,7 +172,7 @@ namespace KerryDPeay_Blog.Controllers
             return View(blogPost);
         }
 
-        // POST: BlogPosts/Delete/5 - The actual functionality of the View
+        // POST: BlogPosts/Delete/5 - This action allows the user to delete the post from the database.
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
