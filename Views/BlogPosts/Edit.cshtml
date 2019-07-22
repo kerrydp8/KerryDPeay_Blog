@@ -16,7 +16,7 @@
 <h1 class="text-center"><u>Edit Post</u></h1>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "BlogPosts", FormMethod.Post, new { enctype = "Multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -74,7 +74,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MediaURL, new { htmlAttributes = new { @class = "form-control" } })
+                    <input name ="image" type="file" class="form-control" id="fileUpload" />
                     @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -97,9 +97,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" /> <!--Returns the Edit view for the post but upon click, the Create action is used.
-                                                                                     A new title and slug are created and stored, leading to this post replacing
-                                                                                     the former post instead of being added on top.-->
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <!--Returns the Edit view for the post but upon click, the Create action is used.
+                        A new title and slug are created and stored, leading to this post replacing
+                        the former post instead of being added on top.-->
                 </div>
             </div>
         </div>

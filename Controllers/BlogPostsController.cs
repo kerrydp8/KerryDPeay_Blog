@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,7 +21,6 @@ namespace KerryDPeay_Blog.Controllers
         {
             return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
         }
-
         public ActionResult AllPosts()
         {
             return View(db.BlogPosts.Where(b => b.Published).ToList());
@@ -73,7 +73,7 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Title,Abstract,Body,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -96,14 +96,26 @@ namespace KerryDPeay_Blog.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+
+                    var fileName = Path.GetFileName(image.FileName);
+
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName)); blogPost.MediaURL = "/Uploads/" + fileName;
+                }
+
+
                 blogPost.Slug = Slug; //Creates a new slug and stores it in a variable
                 blogPost.Create = DateTime.Now; //Stores the time in which the post is created. 
                 db.BlogPosts.Add(blogPost); //Adds the current post to the collection of posts. 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(blogPost);
         }
+
+   
 
         // GET: BlogPosts/Edit/5 - Returns the Edit View only for a particular post. This Action (Http:Get) searches for the post in the 
         //database. 
@@ -128,9 +140,7 @@ namespace KerryDPeay_Blog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        //public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaURL,Published,Create,Update")] BlogPost blogPost)
-        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -149,6 +159,15 @@ namespace KerryDPeay_Blog.Controllers
                         ModelState.AddModelError("Title", "The title must be unique");
                         return View(blogPost);
                     }
+
+                    if (ImageUploadValidator.IsWebFriendlyImage(image))
+                    {
+
+                        var fileName = Path.GetFileName(image.FileName);
+
+                        image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName)); blogPost.MediaURL = "/Uploads/" + fileName;
+                    }
+
                     blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
                 }
 

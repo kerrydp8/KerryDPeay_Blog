@@ -4,75 +4,81 @@
     ViewBag.Title = "Details";
 }
 
-    <style>
+<style>
 
-        #scale {
-            background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
-            background-repeat: no-repeat;
-            background-size: 2000px 2000px;
-        }
-    </style>
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 2000px 2000px;
+    }
+</style>
 
 <h1><u>@Model.Title</u></h1>
 
 <h3>@Model.Abstract</h3>
 
+@if (Model.MediaURL != null)
+{
+    <img class="img-responsive" src="@Model.MediaURL" alt="image">
+}
+
 <!--<h2>Details</h2>-->
 
-<body id="scale"><div>
-    <!--<h4>BlogPost</h4>-->
-    <hr />
-    <dl>
+<body id="scale">
+    <div>
+        <!--<h4>BlogPost</h4>-->
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Slug)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Slug)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Body)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
 
-        <dd>
-            @Html.Raw(Model.Body)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Published)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Create)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Create)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Update)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Update)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Update)
-        </dd>
-    </dl>
-</div></body>
+            <dd>
+                @Html.DisplayFor(model => model.Update)
+            </dd>
+        </dl>
+    </div>
+</body>
 
 
 <p class="text-center">

@@ -56,25 +56,32 @@
 
                 @foreach (var post in Model)
                 {
-                    <div class="post-preview">
-                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                            <!--Searches for a particular post and returns its Details by Slug-->
-                            <!--<a href="post.html">-->
-                            <h2 class="post-title"> @post.Title </h2>
-                            <h3 class="post-subtitle">
-                                @post.Abstract
-                            </h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#">Kerry Peay's Blog</a>
-                            on September 24, 2017
-                        </p>
+            <div class="post-preview">
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
 
-                        @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
-                        @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
-                        @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
-                    </div>
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
+
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
+
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">Kerry Peay's Blog</a>
+                        on September 24, 2017
+                    </p>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                    @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                    @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+            </div>
                     <hr>
                 }
 
