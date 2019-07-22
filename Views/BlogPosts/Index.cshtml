@@ -6,39 +6,59 @@
 
 <style>
 
-  #scale {
-  background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
-  background-repeat: no-repeat;
-  background-size: 1800px 1200px ;
-}
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 1800px 1200px;
+    }
 
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
 
-<br />
-
-<h1 class="text-center">Kerry Peay's Blog</h1>
-
-<br />
-<br />
-
-<img src="http://www.studentworldonline.com/userfiles/images/courses%20-%20online%20coding%20for%20free.jpg" style="width:400px;height:300px;" align="right"/>
-<img src="https://www.wildjasmine.com/images-1/data-management.png" style="width:400px; height:300px;" align="left"/>
+<div class="container">
+    <img src="https://tchol.org/images/open-book-transparent-8.png" alt="journal" style="width:500px; height:400px;" class="center">
+    <div class="centered h1"><b><font color="black">Kerry Peay's Blog</font></b></div>
+</div>
 
 <br />
-<br />
-<br />
+
+<p class="text-center">
+    <button class="btn btn-primary">@Html.ActionLink("Create New Post", "Create")</button>
+</p>
+
 <br />
 
 <body id="scale">
     <!-- Main Content -->
     <div class="container">
-        <div class="row">
+        <div class="row text-left">
             <div class="col-lg-8 col-md-10 mx-auto">
-                
+
+                <h2 class="text-center"><u><font color="black">Recent Posts</font></u></h2>
+
                 @foreach (var post in Model)
                 {
                     <div class="post-preview">
-                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })"> <!--Searches for a particular post and returns its Details by Slug-->
+                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                            <!--Searches for a particular post and returns its Details by Slug-->
                             <!--<a href="post.html">-->
                             <!--<h2 class="post-title"> @post.Title </h2>-->
                             <h3 class="post-subtitle">
@@ -67,10 +87,6 @@
     </div>
 
     <hr>
-
-    <p class="text-center">
-        <button class="btn btn-primary">@Html.ActionLink("Create New", "Create")</button>
-    </p>
 
     <!-- Footer -->
     <footer>
@@ -154,7 +170,7 @@
 
 
         <!-- Page Header -->
-       
+
             <div class="overlay"></div>
             <div class="container">
                 <div class="row text-center">
