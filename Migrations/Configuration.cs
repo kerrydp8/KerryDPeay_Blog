@@ -36,7 +36,6 @@ namespace KerryDPeay_Blog.Migrations
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
-
                 roleManager.Create(new IdentityRole
                 {
                     Name = "Admin"

@@ -12,22 +12,23 @@ using KerryDPeay_Blog.Models;
 
 namespace KerryDPeay_Blog.Controllers
 {
+    [Authorize(Roles = "Admin")] //To access these posts, you must be logged in as an Administrator 
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
         }
+
+        [AllowAnonymous]
         public ActionResult AllPosts()
         {
             return View(db.BlogPosts.Where(b => b.Published).ToList());
         }
-
-        [Authorize(Roles ="Admin")]
-
         public ActionResult AdminIndex()
         {
             var publishedBlogPosts = db.BlogPosts.ToList();
@@ -35,16 +36,15 @@ namespace KerryDPeay_Blog.Controllers
 
         }
 
-        [Authorize(Roles = "Moderator")]
-
+        [Authorize(Roles = "Moderator")] //To access these posts, you must be logged in as an Moderator 
         public ActionResult ModeratorIndex()
         {
             var publishedBlogPosts = db.BlogPosts.ToList();
             return View("Index", publishedBlogPosts);
-
         }
 
         // GET: BlogPosts/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
