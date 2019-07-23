@@ -7,7 +7,6 @@ namespace KerryDPeay_Blog.Migrations
     using KerryDPeay_Blog.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Microsoft.AspNetCore.Identity;
 
     internal sealed class Configuration : DbMigrationsConfiguration<KerryDPeay_Blog.Models.ApplicationDbContext>
     {
@@ -32,7 +31,7 @@ namespace KerryDPeay_Blog.Migrations
 
             #region roleManager
 
-            var roleManager = new Microsoft.AspNet.Identity.RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -42,9 +41,9 @@ namespace KerryDPeay_Blog.Migrations
                 });
             }
 
+            //if there is not a role existing yet, add a moderator role
             if (!context.Roles.Any(r => r.Name == "Moderator"))
             {
-
                 roleManager.Create(new IdentityRole
                 {
                     Name = "Moderator"
@@ -54,7 +53,7 @@ namespace KerryDPeay_Blog.Migrations
             #endregion
 
             //I need to create a few users that will eventually occupy the roles of either Admin or Moderator
-            var userManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             if (!context.Users.Any(u => u.Email == "kerrydp8@outlook.com"))
             {
@@ -70,7 +69,10 @@ namespace KerryDPeay_Blog.Migrations
                 "Wiiugamer12");
             }
 
-            var userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
+            var userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
+            userManager.AddToRole(userId, "Moderator");
+
+            userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
             userManager.AddToRole(userId, "Admin");
         }
 

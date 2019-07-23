@@ -24,7 +24,6 @@ namespace KerryDPeay_Blog.Controllers
             return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
         }
 
-        [AllowAnonymous]
         public ActionResult AllPosts()
         {
             return View(db.BlogPosts.Where(b => b.Published).ToList());
@@ -36,7 +35,6 @@ namespace KerryDPeay_Blog.Controllers
 
         }
 
-        [Authorize(Roles = "Moderator")] //To access these posts, you must be logged in as an Moderator 
         public ActionResult ModeratorIndex()
         {
             var publishedBlogPosts = db.BlogPosts.ToList();
