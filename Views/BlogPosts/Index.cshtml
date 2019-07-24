@@ -50,12 +50,18 @@
     <p class="text-center">
         <button class="btn btn-primary">@Html.ActionLink("Create New Post", "Create")</button>
     </p>
+
+    <p class="text-center">
+        <button class="btn btn-primary">@Html.ActionLink("Log Out", "LogOff", "Account")</button>
+    </p>
 }
 
+else
+{
     <p class="text-center">
         <button class="btn btn-primary">@Html.ActionLink("Login", "Login", "Account")</button>
     </p>
-
+}
 
 <body id="scale">
     <!-- Main Content -->
