@@ -23,7 +23,6 @@ namespace KerryDPeay_Blog.Controllers
         ApplicationDbContext context;
         public AccountController()
         {
-            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

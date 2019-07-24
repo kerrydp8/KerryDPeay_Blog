@@ -69,11 +69,23 @@ namespace KerryDPeay_Blog.Migrations
                 "Wiiugamer12");
             }
 
+            if (!context.Users.Any(u => u.Email == "JTwichell@Mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "JTwichell@Mailinator.com",
+                    Email = "JTwichell@Mailinator.com",
+                    FirstName = "Jason",
+                    LastName = "Twichell",
+                    DisplayName = "Twich"
+                },"Abc&123!");
+
             var userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
             userManager.AddToRole(userId, "Moderator");
 
             userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
             userManager.AddToRole(userId, "Admin");
+            }
         }
 
     }

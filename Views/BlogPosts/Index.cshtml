@@ -42,7 +42,7 @@
 <br />
 
 
-@if (User.IsInRole("Moderator")) //User must be logged in as a Moderator or Administrator to create posts.
+@if (User.IsInRole("Admin")) //User must be logged in as a Moderator or Administrator to create posts.
 {
     <p class="text-center">
         <button class="btn btn-primary">@Html.ActionLink("Create New Post", "Create")</button>
