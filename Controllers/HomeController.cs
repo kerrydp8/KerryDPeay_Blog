@@ -1,4 +1,5 @@
 ﻿using KerryDPeay_Blog.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,10 +14,13 @@ namespace KerryDPeay_Blog.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var publishedPosts = View(db.BlogPosts.Where(b => b.Published).ToList());
-            return View(publishedPosts);
+            int pageSize = 3; // display three blog posts at a time on this page
+            int pageNumber = (page ?? 1);
+
+            var publishedPosts = db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create);
+            return View(publishedPosts.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult About()
