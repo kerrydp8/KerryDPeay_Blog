@@ -12,7 +12,7 @@ using KerryDPeay_Blog.Models;
 
 namespace KerryDPeay_Blog.Controllers
 {
-    [Authorize(Roles = "Admin")] //To access these posts, you must be logged in as an Administrator 
+    [Authorize(Roles = "Moderator")] //To access these posts, you must be logged in as an Administrator 
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,12 +21,6 @@ namespace KerryDPeay_Blog.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         { 
-            /*
-            if (User.IsInRole("Admin")) {
-                return View("Contact");
-            } 
-            THIS CODE WAS ONLY FOR TESTING PURPOSES. Apparently, it is as if the Admin is already logged in to the system.
-            */
             return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
         }
 
