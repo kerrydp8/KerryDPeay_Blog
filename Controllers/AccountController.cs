@@ -20,7 +20,6 @@ namespace KerryDPeay_Blog.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        ApplicationDbContext context;
         public AccountController()
         {
         }
