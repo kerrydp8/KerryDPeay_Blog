@@ -477,6 +477,8 @@ namespace KerryDPeay_Blog.Controllers
                 //var svc = new PersonalEmail();
                 //await svc.SendAsync(new PersonalEmail());
 
+
+
                 await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
             }
             return RedirectToAction("ConfirmationSent");

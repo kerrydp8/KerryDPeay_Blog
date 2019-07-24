@@ -40,7 +40,7 @@ namespace KerryDPeay_Blog.Controllers
             {
                 try
                 {
-                    var from = model.FromName + "-" + $"{model.FromEmail}<{ConfigurationManager.AppSettings["emailto"]}>"; //THe name and address of the person who entered it.
+                    var from = model.FromName + "," + $"{model.FromEmail}<{ConfigurationManager.AppSettings["emailto"]}>"; //THe name and address of the person who entered it.
 
                     var email = new MailMessage(from, ConfigurationManager.AppSettings["emailto"])
                     {
