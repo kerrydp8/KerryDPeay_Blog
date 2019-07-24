@@ -1,4 +1,6 @@
 ﻿using System;
+using PagedList;
+using PagedList.Mvc;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -19,9 +21,12 @@ namespace KerryDPeay_Blog.Controllers
 
         // GET: BlogPosts
         [AllowAnonymous]
-        public ActionResult Index()
-        { 
-            return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToList()); //Lists all of the posts in the order they were created (descending order)
+        public ActionResult Index(int? page)
+        {
+            int pageSize = 3; // display three blog posts at a time on this page
+            int pageNumber = (page ?? 1);
+
+            return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToPagedList(pageSize, pageNumber)); //Lists all of the posts in the order they were created (descending order)
         }
 
         public ActionResult AllPosts()

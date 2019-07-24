@@ -61,6 +61,5 @@ namespace KerryDPeay_Blog.Controllers
             }
             return View(model);
         }
-
     }
 }

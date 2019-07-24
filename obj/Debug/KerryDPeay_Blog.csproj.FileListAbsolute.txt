@@ -134,3 +134,7 @@ C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\System.Memory.xml
 C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\System.Numerics.Vectors.xml
 C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\obj\Debug\KerryDPeay_Blog.csprojAssemblyReference.cache
+C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\PagedList.dll
+C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\PagedList.Mvc.dll
+C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\PagedList.xml
+C:\Users\Peay\source\repos\KerryDPeay_Blog\KerryDPeay_Blog\bin\PagedList.Mvc.xml
