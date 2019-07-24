@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KerryDPeay_Blog.Models;
+using System.Web.Configuration;
+using System.Net.Mail;
 
 namespace KerryDPeay_Blog.Controllers
 {
@@ -18,8 +20,10 @@ namespace KerryDPeay_Blog.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ApplicationDbContext context;
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -155,20 +159,33 @@ namespace KerryDPeay_Blog.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+
+                    var emailFrom = WebConfigurationManager.AppSettings["emailFrom"];
+
+                    var email = new MailMessage(emailFrom, model.Email)
+                    {
+                        Subject = "Confirm your account",
+                        Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + ">here></a>",
+                        IsBodyHtml = true
+                    };
+
+                    var svc = new PersonalEmail();
+
+                    await svc.SendAsync(email);
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+                // If we got this far, something failed, redisplay form
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
