@@ -41,6 +41,7 @@ namespace KerryDPeay_Blog.Migrations
                 });
             }
 
+            /*
             //if there is not a role existing yet, add a moderator role
             if (!context.Roles.Any(r => r.Name == "Moderator"))
             {
@@ -49,6 +50,7 @@ namespace KerryDPeay_Blog.Migrations
                     Name = "Moderator"
                 });
             }
+            */
 
             #endregion
 
@@ -65,28 +67,15 @@ namespace KerryDPeay_Blog.Migrations
                     FirstName = "Kerry",
                     LastName = "Peay",
                     DisplayName = "kerrydp8"
-                },
-                "Wiiugamer12");
+                },"Wiiugamer12");
             }
 
-            if (!context.Users.Any(u => u.Email == "JTwichell@Mailinator.com"))
-            {
-                userManager.Create(new ApplicationUser
-                {
-                    UserName = "JTwichell@Mailinator.com",
-                    Email = "JTwichell@Mailinator.com",
-                    FirstName = "Jason",
-                    LastName = "Twichell",
-                    DisplayName = "Twich"
-                },"Abc&123!");
-
-            var userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Moderator");
-
-            userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
+            var userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
             userManager.AddToRole(userId, "Admin");
-            }
-        }
 
+            //userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
+            //userManager.AddToRole(userId, "Moderator");
+        }
     }
+
 }
