@@ -49,41 +49,75 @@
         <div class="row text-left">
             <div class="col-lg-8 col-md-10 mx-auto">
 
-                @foreach (var post in Model)
+                @if (User.IsInRole("Admin"))
                 {
-                    <div class="post-preview">
-                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                            <!--Searches for a particular post and returns its Details by Slug-->
-                            <!--<a href="post.html">-->
+                    foreach (var post in Model)
+                    {
+                        <div class="post-preview">
+                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                                <!--Searches for a particular post and returns its Details by Slug-->
+                                <!--<a href="post.html">-->
 
-                            @if (@post.MediaURL != null)
-                            {
-                                <img class="img-responsive" src="@post.MediaURL" alt="image">
-                            }
+                                @if (@post.MediaURL != null)
+                                {
+                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
+                                }
 
-                            <h2 class="post-title"> @post.Title </h2>
-                            <h3 class="post-subtitle">
-                                @post.Abstract
-                            </h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#">Kerry Peay's Blog</a>
-                            on September 24, 2017
-                        </p>
+                                <h2 class="post-title"> @post.Title </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
 
-                        @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
-                        @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
-                        @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
-                    </div>
-                    <hr>
+                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+                        </div>
+                        <hr>
+                    }
                 }
 
-                <!-- Pager -->
-            <div class="clearfix">
-                <button class="button btn-primary">@Html.ActionLink("Back to Homepage", "Index")</button>
-                <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->
+                else
+                {
+                    foreach (var post in Model)
+                    {
+            <div class="post-preview">
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
+
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
+
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#">Kerry Peay's Blog</a>
+                    on September 24, 2017
+                </p>
+                @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
             </div>
+                        <hr>
+                    }
+                }
+
+
+                <!-- Pager -->
+                <div class="clearfix">
+                    <button class="button btn-primary">@Html.ActionLink("Back to Homepage", "Index")</button>
+                    <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->
+                </div>
             </div>
         </div>
     </div>
