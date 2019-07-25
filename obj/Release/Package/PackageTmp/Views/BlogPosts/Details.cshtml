@@ -1,0 +1,92 @@
+﻿@model KerryDPeay_Blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 2000px 2000px;
+    }
+</style>
+
+<h1><u>@Model.Title</u></h1>
+
+<h3>@Model.Abstract</h3>
+
+@if (Model.MediaURL != null)
+{
+    <img class="img-responsive" src="@Model.MediaURL" alt="image">
+}
+
+<!--<h2>Details</h2>-->
+
+<body id="scale">
+    <div>
+        <!--<h4>BlogPost</h4>-->
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Slug)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Slug)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Body)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Published)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Update)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Update)
+            </dd>
+        </dl>
+    </div>
+</body>
+
+
+<p class="text-center">
+    
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> 
+    }
+
+    <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
+</p>

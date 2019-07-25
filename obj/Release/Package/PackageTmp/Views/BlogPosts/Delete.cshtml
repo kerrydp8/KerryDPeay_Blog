@@ -1,0 +1,118 @@
+﻿@model KerryDPeay_Blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<style>
+
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 2000px 2000px;
+    }
+</style>
+
+<h2 class="text-center">Delete This Post?</h2>
+
+
+
+<body id="scale">
+
+    <div>
+        <!--<h4>BlogPost</h4>-->
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Abstract)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Abstract)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Slug)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Slug)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Body)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Published)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Update)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Update)
+            </dd>
+
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
+
+            <dt>
+                @Html.Raw(Model.Body)
+            </dt>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color text-center">
+        @if (User.IsInRole("Admin"))
+        {
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        }
+        <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
+
+    </div>
+        }
+
+    </div>
+
+</body>
+

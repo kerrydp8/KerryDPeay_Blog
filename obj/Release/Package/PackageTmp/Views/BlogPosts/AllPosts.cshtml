@@ -1,0 +1,175 @@
+﻿@model IEnumerable<KerryDPeay_Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 1800px 1600px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<div class="container">
+    <img src="http://icons.iconarchive.com/icons/iconleak/or/256/clipboard-icon.png" alt="journal" style="width:500px; height:400px;" class="center">
+    <br />
+    <br />
+    <br />
+    <div class="centered h1"><b><font color="black">All Posts</font></b></div>
+</div>
+
+<br />
+
+<body id="scale">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-lg-8 col-md-10 mx-auto">
+
+                @if (User.IsInRole("Admin"))
+                {
+                    foreach (var post in Model)
+                    {
+                        <div class="post-preview">
+                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                                <!--Searches for a particular post and returns its Details by Slug-->
+                                <!--<a href="post.html">-->
+
+                                @if (@post.MediaURL != null)
+                                {
+                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
+                                }
+
+                                <h2 class="post-title"> @post.Title </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
+
+                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+                        </div>
+                        <hr>
+                    }
+                }
+
+                else
+                {
+                    foreach (var post in Model)
+                    {
+            <div class="post-preview">
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
+
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
+
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#">Kerry Peay's Blog</a>
+                    on September 24, 2017
+                </p>
+                @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+            </div>
+                        <hr>
+                    }
+                }
+
+
+                <!-- Pager -->
+                <div class="clearfix">
+                    <button class="button btn-primary">@Html.ActionLink("Back to Homepage", "Index")</button>
+                    <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+    <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <!--<script src="js/clean-blog.min.js"></script>-->
+    <link href="~/Scripts/clean-blog.min.css" rel="stylesheet" />
+
+</body>

@@ -1,0 +1,261 @@
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<KerryDPeay_Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 1800px 1600px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<div class="container">
+    <img src="https://tchol.org/images/open-book-transparent-8.png" alt="journal" style="width:500px; height:400px;" class="center">
+    <div class="centered h1"><b><font color="black">Kerry Peay's Blog</font></b></div>
+</div>
+
+<br />
+<br />
+
+
+@if (User.IsInRole("Admin")) //User must be logged in as a Moderator or Administrator to create posts.
+{
+    <p class="text-center">
+        <button class="btn btn-primary">@Html.ActionLink("Create New Post", "Create")</button>
+    </p>
+
+    <p class="text-center">
+        <button id="logout" class="btn btn-primary">@Html.ActionLink("Log Out", "LogOff", "Account")</button>
+    </p>
+}
+
+else
+{
+    <p class="text-center">
+        <button class="btn btn-primary">@Html.ActionLink("Login", "Login", "Account")</button>
+    </p>
+}
+
+<body id="scale">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-lg-8 col-md-10 mx-auto">
+
+                <h2 class="text-center"><u><font color="black">Recent Posts</font></u></h2>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    foreach (var post in Model)
+                    {
+                        <div class="post-preview">
+                            
+                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                                <!--Searches for a particular post and returns its Details by Slug-->
+                                <!--<a href="post.html">-->
+
+                                @if (@post.MediaURL != null)
+                                {
+                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
+                                }
+
+                                <h2 class="post-title"> @post.Title </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
+                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+                        </div>
+                        <hr>
+                    }
+                }
+
+                else
+                {
+                    foreach (var post in Model)
+                    {
+            <div class="post-preview">
+                
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
+
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
+
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
+
+                <p class="post-meta">
+                    Posted by
+                    <a href="#">Kerry Peay's Blog</a>
+                    on September 24, 2017
+                </p>
+
+                @Html.ActionLink("Details", "Details", new { id = post.Id }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+
+            </div>
+                        <hr>
+                    }
+                }
+
+                <!-- Pager -->
+                <div class="clearfix">
+                    <button class="button btn-primary">@Html.ActionLink("View All Posts", "AllPosts")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+    {<div class="controls controls-row search-row">
+            <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
+            <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
+                <i class="icon-search"></i>
+            </button>
+        </div>}
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+    <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <!--<script src="js/clean-blog.min.js"></script>-->
+    <link href="~/Scripts/clean-blog.min.css" rel="stylesheet" />
+
+
+</body>
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }));
+
+        <script>
+
+            /*
+                     <!-- Navigation -->
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html">Kerry Peay's Blog</a>
+                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            Menu
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="post.html">Sample Post</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+                <!-- Page Header -->
+
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <div class="site-heading">
+                                    <h1><font color="black">Kerry Peay's Blog</font></h1>
+                                    <!--<span class="subheading">A Blog Theme by Start Bootstrap</span>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             */
+
+        </script>
+
