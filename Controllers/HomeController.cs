@@ -65,6 +65,7 @@ namespace KerryDPeay_Blog.Controllers
                 }
             }
             return View(model);
+            //return View("Index", "BlogPosts"); - Does not work
         }
     }
 }
