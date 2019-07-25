@@ -14,6 +14,7 @@ using System.Net.Mail;
 
 namespace KerryDPeay_Blog.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {

@@ -11,6 +11,7 @@ using KerryDPeay_Blog.Models;
 namespace KerryDPeay_Blog.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

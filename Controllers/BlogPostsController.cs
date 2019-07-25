@@ -14,6 +14,7 @@ using KerryDPeay_Blog.Models;
 
 namespace KerryDPeay_Blog.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles = "Admin")] //To access these posts, you must be logged in as an Administrator 
     public class BlogPostsController : Controller
     {
