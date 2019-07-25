@@ -21,12 +21,34 @@ namespace KerryDPeay_Blog.Controllers
 
         // GET: BlogPosts
         [AllowAnonymous]
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchStr)
         {
-            int pageSize = 3; // display three blog posts at a time on this page
+            ViewBag.Search = searchStr;
+            var blogList = IndexSearch(searchStr);
+
+            int pageSize = 5; // the number of posts you want to display per page             
             int pageNumber = (page ?? 1);
 
-            return View(db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Create).ToPagedList(pageSize, pageNumber)); //Lists all of the posts in the order they were created (descending order)
+            return View(blogList.ToPagedList(pageNumber, pageSize)); //Lists all of the posts in the order they were created (descending order)
+        }
+
+        public IQueryable<BlogPost> IndexSearch(string searchStr)
+        {
+            IQueryable<BlogPost> result = null;
+
+            if (searchStr != null) {
+                result = db.BlogPosts.AsQueryable();
+                result = result.Where(p => p.Title.Contains(searchStr) || 
+                p.Body.Contains(searchStr) || p.Comments.Any(c => c.Body.Contains(searchStr) || 
+                c.Author.FirstName.Contains(searchStr) || c.Author.LastName.Contains(searchStr) || 
+                c.Author.DisplayName.Contains(searchStr) || c.Author.Email.Contains(searchStr)));
+            }
+            else
+            {
+                result = db.BlogPosts.AsQueryable();
+            }
+
+            return result.OrderByDescending(p => p.Create);
         }
 
         public ActionResult AllPosts()

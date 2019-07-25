@@ -112,6 +112,14 @@ else
 
     <hr>
 
+    @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+    {<div class="controls controls-row search-row">
+            <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
+            <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
+                <i class="icon-search"></i>
+            </button>
+        </div>}
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -160,8 +168,13 @@ else
     <!--<script src="js/clean-blog.min.js"></script>-->
     <link href="~/Scripts/clean-blog.min.css" rel="stylesheet" />
 
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    <!--
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        -->
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }));
+
 
 </body>
 
