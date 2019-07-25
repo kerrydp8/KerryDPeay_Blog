@@ -54,9 +54,9 @@ namespace KerryDPeay_Blog
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "579225015814994",
+               appSecret: "68f6fe3481d50f612fefda07f2e1dfe6");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
