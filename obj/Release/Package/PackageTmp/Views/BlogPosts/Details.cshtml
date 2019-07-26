@@ -175,6 +175,14 @@
             <textarea name="commentUR">@comment.UpdateReason</textarea>
             <button class="btn btn-primary" type="submit">Edit</button>
         }
+
+        using (Html.BeginForm("Delete", "Comments", new { id = comment.Id }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        }
+
     }
+
 }
 
