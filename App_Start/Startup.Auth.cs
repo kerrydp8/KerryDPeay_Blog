@@ -50,19 +50,28 @@ namespace KerryDPeay_Blog
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            /*
+            app.UseTwitterAuthentication(
+               consumerKey: "FuW4EGyrZpWh1INHc2H6pl4mY",
+               consumerSecret: "aC0xlXNZPEWCAPaFYa51OZJOvGU1lL4tPMvtogwjCeeSM3d2T8");
+               */
 
             app.UseFacebookAuthentication(
                appId: "579225015814994",
                appSecret: "68f6fe3481d50f612fefda07f2e1dfe6");
 
+            /*
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "37282451184-7nuf9c7p86537gihj5bk3ulggfo4gode.apps.googleusercontent.com",
                 ClientSecret = "HJlxyR0jNeM0NNolT-ME6wwC"
             });
+            */
+
+            /*
+            ClientId = WebConfigurationManager.AppSettings["googleClientId"] 
+            ClientSecret = WebConfigurationManager.AppSettings["googleClientSecret"]
+             */
         }
     }
 }

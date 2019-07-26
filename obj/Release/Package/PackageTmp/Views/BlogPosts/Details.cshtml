@@ -82,11 +82,71 @@
 
 
 <p class="text-center">
-    
+
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> 
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" />
     }
 
     <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 </p>
+
+
+
+
+
+@*Conditionally render the Add Comment form*@
+@if (User.Identity.IsAuthenticated)
+{
+    @*Create a form to collect the Comment from the logged in user*@
+    using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Slug)
+        @Html.Hidden("BlogPostId", Model.Id)
+        <textarea name="CommentBody" placeholder="Add Comment..." />
+        
+        <button class="btn btn-primary" type="submit">Add</button>
+        <input type="text" id="submit" />
+    }
+
+}
+
+
+@*Displaying the comments associated with the BlogPost*@
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12 text-center h3">
+        Comment Section
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center h4">
+        @{ 
+            var count = Model.Comments.Count();
+            var word = count == 1 ? "comment" : "comments";
+        }
+        (@count @word...)
+    </div>
+</div>
+
+<br />
+
+@foreach (var comment in Model.Comments.OrderByDescending(c=>c.Created))
+{
+     <hr />
+     <div class="row">
+         Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
+     </div>
+
+     <div class="row">
+         <div class="col-md-12">
+             @comment.Body
+         </div>
+     </div>
+     <hr />
+}
+
