@@ -51,7 +51,7 @@ namespace KerryDPeay_Blog.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BlogPostId")] Comment comment, string commentBody, string slug)
+        public ActionResult Create([Bind(Include = "BlogPostId")] Comment comment, string commentBody, string Slug)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace KerryDPeay_Blog.Models
                 comment.Created = DateTime.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Details", "BlogPosts", new { slug = slug });
+                return RedirectToAction("Details", "BlogPosts", new { slug = Slug });
             }
 
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", comment.AuthorId);
