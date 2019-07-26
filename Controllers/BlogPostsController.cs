@@ -70,6 +70,7 @@ namespace KerryDPeay_Blog.Controllers
             return View("Index", publishedBlogPosts);
         }
 
+        /*
         // GET: BlogPosts/Details/5
         [AllowAnonymous]
         public ActionResult Details(int? id)
@@ -88,6 +89,26 @@ namespace KerryDPeay_Blog.Controllers
 
             return View(blogPost);
         }
+        */
+
+        [AllowAnonymous]
+        // GET: BlogPosts/Details/5
+        public ActionResult Details(string Slug)
+        {
+            if (String.IsNullOrWhiteSpace(Slug))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var blogPost = db.BlogPosts.FirstOrDefault(p => p.Slug == Slug);
+
+            if (blogPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View(blogPost);
+        }
+
+
 
         // GET: BlogPosts/Create - This action (Http:Get) is returning a View to the Creation page.
         public ActionResult Create()
