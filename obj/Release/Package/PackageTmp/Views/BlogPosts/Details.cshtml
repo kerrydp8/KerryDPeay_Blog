@@ -141,11 +141,23 @@
         Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
     </div>
 
+    if (User.IsInRole("Admin"))
+    {
+        if (@comment.UpdateReason != null)
+        {
+            <div class="row">
+                @comment.UpdateReason
+            </div>
+        }
+    }
+
+
     <div class="row">
         <div class="col-md-12">
             @comment.Body
         </div>
     </div>
+
     <hr />
 
     if (User.IsInRole("Admin"))
@@ -160,6 +172,7 @@
             @Html.HiddenFor(model => comment.BlogPostId)
             @Html.HiddenFor(model => comment.UpdateReason)
             <textarea name="commentBody">@comment.Body</textarea>
+            <textarea name="commentUR">@comment.UpdateReason</textarea>
             <button class="btn btn-primary" type="submit">Edit</button>
         }
     }
