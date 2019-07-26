@@ -90,13 +90,15 @@ namespace KerryDPeay_Blog.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,BlogPostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,BlogPostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment, string Slug, string commentBody)
         {
             if (ModelState.IsValid)
             {
+                comment.Body = commentBody;
+                comment.Updated = DateTime.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BlogPosts", new { slug = Slug });
             }
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", comment.AuthorId);
             ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);

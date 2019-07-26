@@ -105,7 +105,7 @@
         @Html.HiddenFor(model => model.Slug)
         @Html.Hidden("BlogPostId", Model.Id)
         <textarea name="CommentBody" placeholder="Add Comment..."></textarea>
-        
+
         <button class="btn btn-primary" type="submit">Add</button>
     }
 
@@ -124,7 +124,7 @@
 
 <div class="row">
     <div class="col-md-12 text-center h4">
-        @{ 
+        @{
             var count = Model.Comments.Count();
             var word = count == 1 ? "comment" : "comments";
         }
@@ -134,18 +134,34 @@
 
 <br />
 
-@foreach (var comment in Model.Comments.OrderByDescending(c=>c.Created))
+@foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
 {
-     <hr />
-     <div class="row">
-         Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
-     </div>
+    <hr />
+    <div class="row">
+        Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
+    </div>
 
-     <div class="row">
-         <div class="col-md-12">
-             @comment.Body
-         </div>
-     </div>
-     <hr />
+    <div class="row">
+        <div class="col-md-12">
+            @comment.Body
+        </div>
+    </div>
+    <hr />
+
+    if (User.IsInRole("Admin"))
+    {
+        using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Slug)
+            @Html.HiddenFor(model => comment.Id)
+            @Html.HiddenFor(model => comment.AuthorId)
+            @Html.HiddenFor(model => comment.Created)
+            @Html.HiddenFor(model => comment.BlogPostId)
+            @Html.HiddenFor(model => comment.UpdateReason)
+            <textarea name="commentBody">@comment.Body</textarea>
+            <button class="btn btn-primary" type="submit">Edit</button>
+        }
+    }
 }
 
