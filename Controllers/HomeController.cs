@@ -65,7 +65,8 @@ namespace KerryDPeay_Blog.Controllers
                 }
             }
             return View(model);
-            //return View("Index", "BlogPosts"); - Does not work
+            //Console.WriteLine("Message has been sent");
+            //return View("Index", "BlogPosts"); //Does not work
         }
     }
 }

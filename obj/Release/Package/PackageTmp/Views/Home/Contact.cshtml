@@ -1,13 +1,13 @@
 ﻿@model KerryDPeay_Blog.Models.EmailModel
 
-    <style>
+<style>
 
-        #scale {
-            background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
-            background-repeat: no-repeat;
-            background-size: 2000px 2000px;
-        }
-    </style>
+    #scale {
+        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: 2000px 2000px;
+    }
+</style>
 
 @using (Html.BeginForm())
 {
@@ -52,20 +52,28 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-primary" value="Send" />
+                <button class="btn btn-primary" onclick="messageSent()">Send</button>
+                <input type="submit" />
             </div>
         </div>
+
+        <script>
+            function messageSent() {
+                alert("Your message has been sent");
+        </script>
+
     </body>
 
     <hr />
 
-  
+    <div>
+        <button class="btn btn-default">@Html.ActionLink("Back to Homepage", "Index", "BlogPosts")</button>
+    </div>
 
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
 
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
