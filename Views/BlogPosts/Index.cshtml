@@ -70,25 +70,6 @@
 <br />
 <br />
 
-
-@if (User.IsInRole("Admin")) //User must be logged in as a Moderator or Administrator to create posts.
-{
-    <p class="text-center">
-        <button class="btn btn-primary">@Html.ActionLink("Create New Post", "Create")</button>
-    </p>
-
-    <p class="text-center">
-        <button id="logout" class="btn btn-primary">@Html.ActionLink("Log Out", "LogOff", "Account")</button>
-    </p>
-}
-
-else
-{
-    <p class="text-center">
-        <button class="btn btn-primary">@Html.ActionLink("Login", "Login", "Account")</button>
-    </p>
-}
-
 <body id="scale">
 
     @if (User.IsInRole("Admin"))
@@ -202,9 +183,6 @@ else
                 }
 
                 <!-- Pager -->
-                <div class="clearfix">
-                    <button class="button btn-primary">@Html.ActionLink("View All Posts", "AllPosts")</button>
-                </div>
             </div>
         </div>
     </div>
@@ -314,6 +292,12 @@ else
                             </div>
                         </div>
                     </div>
+
+
+            Backup All Posts:
+                            <div class="clearfix">
+                    <button class="button btn-primary">(Link to All Posts)</button>
+                </div>
              */
 
         </script>
