@@ -91,13 +91,41 @@ else
 
 <body id="scale">
 
-    <!--Navbar-->
-    <ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-        <li><a href="#about">About</a></li>
-    </ul>
+    @if (User.IsInRole("Admin"))
+    {
+        <!--Navbar-->
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+            <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
+        </ul>
+    }
+
+    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    {
+        <!--Navbar-->
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="@Html.ActionLink("Log Out", "LogOff", "Account")">Logout</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Html.ActionLink("View All Posts", "AllPosts")>About</a></li>
+        </ul>
+    }
+
+    @if (!(User.Identity.IsAuthenticated))
+    {
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="@Html.ActionLink("Login", "Login", "Account")">Login</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Html.ActionLink("View All Posts", "AllPosts")>All Posts</a></li>
+        </ul>
+    }
+
+
+
 
 
     <!-- Main Content -->
