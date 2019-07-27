@@ -146,10 +146,9 @@ namespace KerryDPeay_Blog.Controllers
 
                 if (ImageUploadValidator.IsWebFriendlyImage(image))
                 {
-
                     var fileName = Path.GetFileName(image.FileName);
-
-                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName)); blogPost.MediaURL = "/Uploads/" + fileName;
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    blogPost.MediaURL = "/Uploads/" + fileName;
                 }
 
 
@@ -217,7 +216,8 @@ namespace KerryDPeay_Blog.Controllers
                         image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
                         blogPost.MediaURL = "/Uploads/" + fileName;
                     }
-               
+
+
                 }
 
                 blogPost.Update = DateTime.Now;

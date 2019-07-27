@@ -4,7 +4,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <h4> Send me a message.</h4>
+    <h4 class="text-center">Contact Me</h4>
 
     <hr />
 
@@ -37,7 +37,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Body, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Body, new { @class = "form-control", placeholder = "Enter a message"})
+            @Html.TextBoxFor(m => m.Body, new { @class = "form-control", placeholder = "Enter a message", id = "editor"})
             @Html.ValidationMessageFor(m => m.Body)
         </div>
     </div>

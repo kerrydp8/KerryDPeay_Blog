@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace KerryDPeay_Blog.Models
 {
@@ -15,6 +16,7 @@ namespace KerryDPeay_Blog.Models
         [Required]
         public string Subject { get; set; }
         [Required]
+        [AllowHtml] //THIS IS NEEDED. Html must be allowed to use a RTE.
         public string Body { get; set; }
     }
 }
