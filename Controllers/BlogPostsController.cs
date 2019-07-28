@@ -153,7 +153,7 @@ namespace KerryDPeay_Blog.Controllers
 
 
                 blogPost.Slug = Slug; //Creates a new slug and stores it in a variable
-                blogPost.Create = DateTime.Now; //Stores the time in which the post is created. 
+                blogPost.Create = DateTimeOffset.Now;//Stores the time in which the post is created. 
                 db.BlogPosts.Add(blogPost); //Adds the current post to the collection of posts. 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -220,7 +220,7 @@ namespace KerryDPeay_Blog.Controllers
 
                 }
 
-                blogPost.Update = DateTime.Now;
+                blogPost.Update = DateTimeOffset.Now;
                 db.Entry(blogPost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

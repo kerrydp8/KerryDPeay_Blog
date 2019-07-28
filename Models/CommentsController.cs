@@ -57,7 +57,7 @@ namespace KerryDPeay_Blog.Models
             {
                 comment.Body = commentBody;
                 comment.AuthorId = User.Identity.GetUserId();
-                comment.Created = DateTime.Now;
+                comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "BlogPosts", new { slug = Slug });
@@ -96,7 +96,7 @@ namespace KerryDPeay_Blog.Models
             {
                 comment.Body = commentBody;
                 comment.UpdateReason = commentUR;
-                comment.Updated = DateTime.Now;
+                comment.Updated = DateTimeOffset.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "BlogPosts", new { slug = Slug });
