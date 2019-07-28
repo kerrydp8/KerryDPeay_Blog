@@ -14,7 +14,7 @@ namespace KerryDPeay_Blog.Models
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Moderator")]
 
         // GET: Comments
         public ActionResult Index()
