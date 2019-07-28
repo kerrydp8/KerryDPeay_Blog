@@ -4,34 +4,60 @@
     ViewBag.Title = "Index";
 }
 
-<style>
+    <head>
+        <style>
 
-    #scale {
-        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
-        background-repeat: no-repeat;
-        background-size: 1800px 1600px;
-    }
+            #scale {
+                background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+                background-repeat: no-repeat;
+                background-size: 1800px 1600px;
+            }
 
-    .center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
 
-    .container {
-        position: relative;
-        text-align: center;
-        color: white;
-    }
+            .container {
+                position: relative;
+                text-align: center;
+                color: white;
+            }
 
-    .centered {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+                li a {
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+
+                    li a:hover {
+                        background-color: #111;
+                    }
+        </style>
+    </head>
 
 <div class="container">
     <img src="http://icons.iconarchive.com/icons/iconleak/or/256/clipboard-icon.png" alt="journal" style="width:500px; height:400px;" class="center">
@@ -44,6 +70,42 @@
 <br />
 
 <body id="scale">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <!--Navbar-->
+    <ul>
+        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+        <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
+    </ul>
+    }
+
+    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    {
+        <!--Navbar-->
+<ul>
+    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+    <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+</ul>
+    }
+
+    @if (!(User.Identity.IsAuthenticated))
+    {
+        <!--Navbar-->
+
+<ul>
+    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+</ul>
+    }
+
     <!-- Main Content -->
     <div class="container">
         <div class="row text-left">
@@ -85,28 +147,28 @@
                 {
                     foreach (var post in Model)
                     {
-            <div class="post-preview">
-                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                    <!--Searches for a particular post and returns its Details by Slug-->
-                    <!--<a href="post.html">-->
+                        <div class="post-preview">
+                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                                <!--Searches for a particular post and returns its Details by Slug-->
+                                <!--<a href="post.html">-->
 
-                    @if (@post.MediaURL != null)
-                    {
-                        <img class="img-responsive" src="@post.MediaURL" alt="image">
-                    }
+                                @if (@post.MediaURL != null)
+                                {
+                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
+                                }
 
-                    <h2 class="post-title"> @post.Title </h2>
-                    <h3 class="post-subtitle">
-                        @post.Abstract
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">Kerry Peay's Blog</a>
-                    on September 24, 2017
-                </p>
-                @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
-            </div>
+                                <h2 class="post-title"> @post.Title </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
+                            @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                        </div>
                         <hr>
                     }
                 }

@@ -5,20 +5,103 @@
 }
 
 
-<style>
+<head>
+    <style>
 
-    #scale {
-        background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
-        background-repeat: no-repeat;
-        background-size: 2000px 2000px;
-    }
-</style>
+        #scale {
+            background: url(https://static.vecteezy.com/system/resources/previews/000/122/941/non_2x/sunburst-grunge-background-vector.jpg);
+            background-repeat: no-repeat;
+            background-size: 1800px 1600px;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+    </style>
+</head>
 
 <h2 class="text-center">Delete This Post?</h2>
 
 
 
 <body id="scale">
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <!--Navbar-->
+    <ul>
+        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+        <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
+    </ul>
+    }
+
+    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    {
+        <!--Navbar-->
+<ul>
+    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+    <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+</ul>
+    }
+
+    @if (!(User.Identity.IsAuthenticated))
+    {
+        <!--Navbar-->
+
+<ul>
+    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+</ul>
+    }
+
 
     <div>
         <!--<h4>BlogPost</h4>-->
