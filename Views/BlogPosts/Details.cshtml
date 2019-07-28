@@ -225,7 +225,7 @@
         Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
     </div>
 
-    if (User.IsInRole("Admin"))
+    if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
     {
         if (@comment.UpdateReason != null)
         {
@@ -244,7 +244,7 @@
 
     <hr />
 
-    if (User.IsInRole("Admin"))
+    if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
     {
         using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
         {

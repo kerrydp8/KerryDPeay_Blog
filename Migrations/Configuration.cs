@@ -41,8 +41,6 @@ namespace KerryDPeay_Blog.Migrations
                 });
             }
 
-            /*
-            //if there is not a role existing yet, add a moderator role
             if (!context.Roles.Any(r => r.Name == "Moderator"))
             {
                 roleManager.Create(new IdentityRole
@@ -50,12 +48,23 @@ namespace KerryDPeay_Blog.Migrations
                     Name = "Moderator"
                 });
             }
-            */
-
             #endregion
 
             //I need to create a few users that will eventually occupy the roles of either Admin or Moderator
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            if (!context.Users.Any(u => u.Email == "JTwichell@mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "JTwichell@mailinator.com",
+                    Email = "JTwichell@mailinator.com",
+                    FirstName = "Jason",
+                    LastName = "Twichell",
+                    DisplayName = "Twich"
+                },"Abc&123!");
+            }
+
 
             if (!context.Users.Any(u => u.Email == "kerrydp8@outlook.com"))
             {
@@ -70,11 +79,11 @@ namespace KerryDPeay_Blog.Migrations
                 },"Wiiugamer12");
             }
 
-            var userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
-            userManager.AddToRole(userId, "Admin");
+            var userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
+            userManager.AddToRole(userId, "Moderator");
 
-            //userId = userManager.FindByEmail("JTwichell@Mailinator.com").Id;
-            //userManager.AddToRole(userId, "Moderator");
+            userId = userManager.FindByEmail("kerrydp8@outlook.com").Id;
+            userManager.AddToRole(userId, "Admin");
         }
     }
 
