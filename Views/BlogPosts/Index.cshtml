@@ -87,24 +87,24 @@
     @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
     {
         <!--Navbar-->
-<ul>
-    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-    <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
-    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-</ul>
+        <ul>
+            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        </ul>
     }
 
     @if (!(User.Identity.IsAuthenticated))
     {
         <!--Navbar-->
 
-<ul>
-    <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-    <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-    <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-</ul>
+        <ul>
+            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+            <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        </ul>
     }
 
     <!-- Main Content -->
@@ -182,6 +182,7 @@
                     }
                 }
 
+            <p>@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }))</p>
                 <!-- Pager -->
             </div>
         </div>
@@ -196,6 +197,8 @@
                 <i class="icon-search"></i>
             </button>
         </div>}
+
+
 
     <!-- Footer -->
     <footer>
