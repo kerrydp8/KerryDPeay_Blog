@@ -210,24 +210,29 @@ namespace KerryDPeay_Blog.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 if (user == null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                var emailFrom = WebConfigurationManager.AppSettings["emailto"];
+                var email = new MailMessage(emailFrom, model.Email)
+                {
+
+                    Subject = "Confirm your account",
+                    Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>",
+                    IsBodyHtml = true
+                };
+                var svc = new PersonalEmail();
+                await svc.SendAsync(email);
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
+
 
         //
         // GET: /Account/ForgotPasswordConfirmation
@@ -250,7 +255,7 @@ namespace KerryDPeay_Blog.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+       public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -259,7 +264,6 @@ namespace KerryDPeay_Blog.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
