@@ -51,11 +51,9 @@ namespace KerryDPeay_Blog
             //    clientSecret: "");
 
             
-            /*
             app.UseTwitterAuthentication(
                consumerKey: "FuW4EGyrZpWh1INHc2H6pl4mY",
                consumerSecret: "aC0xlXNZPEWCAPaFYa51OZJOvGU1lL4tPMvtogwjCeeSM3d2T8");
-            */
 
             app.UseFacebookAuthentication(
                appId: "579225015814994",
