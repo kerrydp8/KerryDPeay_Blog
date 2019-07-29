@@ -52,34 +52,78 @@
                 li a:hover {
                     background-color: #111;
                 }
+
+             body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://colorlib.com/wp/wp-content/uploads/sites/2/wordpress-contact-form-plugins.png");
+            height: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+            .hero-text button {
+                border: none;
+                outline: 0;
+                display: inline-block;
+                padding: 10px 25px;
+                color: black;
+                background-color: #ddd;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .hero-text button:hover {
+                    background-color: #555;
+                    color: white;
+                }
     </style>
 </head>
+
+<div class="hero-image">
+    <div class="hero-text">
+        <h1>Contact Me</h1>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <h4 class="text-center">Contact Me</h4>
 
     <body id="scale">
 
         @if (User.IsInRole("Admin"))
         {
             <!--Navbar-->
-        <ul>
-            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
-            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-            <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
-        </ul>
+            <ul>
+                <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+                <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+                <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+                <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+                <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
+            </ul>
         }
 
         @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
         {
             <!--Navbar-->
             <ul>
-                            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+                <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
                 <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
                 <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
                 <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
@@ -90,12 +134,12 @@
         {
             <!--Navbar-->
 
-    <ul>
-        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-        <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-    </ul>
+            <ul>
+                <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+                <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+                <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+            </ul>
         }
 
         @Html.ValidationSummary("", new { @class = "text-danger" })

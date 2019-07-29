@@ -120,12 +120,11 @@
 {
     @Html.AntiForgeryToken()
 
-    <body id="scale">
+<body id="scale">
 
-
-        @if (User.IsInRole("Admin"))
-        {
-            <!--Navbar-->
+    @if (User.IsInRole("Admin"))
+    {
+        <!--Navbar-->
         <ul>
             <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
             <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
@@ -133,118 +132,117 @@
             <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
             <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
         </ul>
-        }
+    }
 
-        @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
-        {
-            <!--Navbar-->
-    <ul>
-        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-        <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
-        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-    </ul>
-        }
+    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    {
+        <!--Navbar-->
+        <ul>
+            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        </ul>
+    }
 
-        @if (!(User.Identity.IsAuthenticated))
-        {
-            <!--Navbar-->
+    @if (!(User.Identity.IsAuthenticated))
+    {
+        <!--Navbar-->
 
-    <ul>
-        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-        <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-    </ul>
-        }
+        <ul>
+            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+            <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        </ul>
+    }
 
+    <div class="form-horizontal">
+        <!--<h4>BlogPost</h4>-->
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Slug)
+        @Html.HiddenFor(model => model.Create)
+        @Html.HiddenFor(model => model.MediaURL)
 
-        <div class="form-horizontal">
-            <!--<h4>BlogPost</h4>-->
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
-            @Html.HiddenFor(model => model.Slug)
-            @Html.HiddenFor(model => model.Create)
-            @Html.HiddenFor(model => model.MediaURL)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Abstract, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Abstract, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Abstract, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Abstract, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Abstract, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Abstract, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", id = "editor" } })
-                    @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", id = "editor" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Published, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Published)
-                        @Html.ValidationMessageFor(model => model.Published, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input name="image" type="file" class="form-control" id="fileUpload" />
-                    @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Create, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Create, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Create, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Update, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Update, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Update, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <!--Returns the Edit view for the post but upon click, the Create action is used.
-                    A new title and slug are created and stored, leading to this post replacing
-                    the former post instead of being added on top.-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Published, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Published)
+                    @Html.ValidationMessageFor(model => model.Published, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-    </body>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="image" type="file" class="form-control" id="fileUpload" />
+                @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Create, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Create, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Create, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Update, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Update, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Update, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <!--Returns the Edit view for the post but upon click, the Create action is used.
+                A new title and slug are created and stored, leading to this post replacing
+                the former post instead of being added on top.-->
+            </div>
+        </div>
+    </div>
+</body>
 
 }
 

@@ -8,7 +8,7 @@
 
     <head>
         <style>
-
+            
             #scale {
                 background: url(https://cdn.shopify.com/s/files/1/0010/0994/2575/products/2066-70-lightblue_0e38026d-498a-45d9-8dcb-5f05f37baa9f_2000x.png?v=1549120526);
                 background-repeat: no-repeat;
@@ -58,18 +58,54 @@
                     li a:hover {
                         background-color: #111;
                     }
+
+                    body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://4.bp.blogspot.com/-BfHECqfGXTA/WIiI9HbqYGI/AAAAAAAA9-4/HNG9S6CfZoY8aOtTEu9N5eoVckTd_OTsgCLcB/s1600/Best%2Bfree%2Bsticky-notes%2Bsoftware.png");
+            height: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+            .hero-text button {
+                border: none;
+                outline: 0;
+                display: inline-block;
+                padding: 10px 25px;
+                color: black;
+                background-color: #ddd;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .hero-text button:hover {
+                    background-color: #555;
+                    color: white;
+                }
         </style>
     </head>
 
-<div class="container">
-    <img src="http://icons.iconarchive.com/icons/iconleak/or/256/clipboard-icon.png" alt="journal" style="width:500px; height:400px;" class="center">
-    <br />
-    <br />
-    <br />
-    <div class="centered h1"><b><font color="black">All Posts</font></b></div>
-</div>
-
-<br />
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1>All Posts</h1>
+        </div>
+    </div>
 
 <body id="scale">
 
