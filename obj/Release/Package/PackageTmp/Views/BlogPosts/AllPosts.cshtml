@@ -4,62 +4,62 @@
     ViewBag.Title = "Index";
 }
 
-    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
 
-    <head>
-        <style>
-            
-            #scale {
-                background: url(https://cdn.shopify.com/s/files/1/0010/0994/2575/products/2066-70-lightblue_0e38026d-498a-45d9-8dcb-5f05f37baa9f_2000x.png?v=1549120526);
-                background-repeat: no-repeat;
-                background-size: 3000px 3000px;
-            }
+<head>
+    <style>
 
-            .center {
+        #scale {
+            background: url(https://cdn.shopify.com/s/files/1/0010/0994/2575/products/2066-70-lightblue_0e38026d-498a-45d9-8dcb-5f05f37baa9f_2000x.png?v=1549120526);
+            background-repeat: no-repeat;
+            background-size: 3000px 3000px;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0000FF;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
                 display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 50%;
-            }
-
-            .container {
-                position: relative;
-                text-align: center;
                 color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
             }
 
-            .centered {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #0000FF;
-            }
-
-            li {
-                float: left;
-            }
-
-                li a {
-                    display: block;
-                    color: white;
-                    text-align: center;
-                    padding: 14px 16px;
-                    text-decoration: none;
+                li a:hover {
+                    background-color: #111;
                 }
 
-                    li a:hover {
-                        background-color: #111;
-                    }
-
-                    body, html {
+        body, html {
             height: 100%;
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
@@ -98,14 +98,26 @@
                     background-color: #555;
                     color: white;
                 }
-        </style>
-    </head>
+    </style>
+</head>
 
-    <div class="hero-image">
-        <div class="hero-text">
-            <h1><b>All Posts</b></h1>
-        </div>
+<div class="hero-image">
+    <div class="hero-text">
+        <h1><b>All Posts</b></h1>
     </div>
+</div>
+
+<br />
+
+@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+{<div class="controls controls-row search-row">
+        <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
+        <button id="searchStr" name="searchStr" class="btn btn-primary" type="submit">
+            <i class="icon-search"></i>
+        </button>
+    </div>}
+
+<br />
 
 <body id="scale">
 
@@ -121,7 +133,7 @@
         </ul>
     }
 
-    @if((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
     {
         <!--Navbar-->
         <ul>
@@ -132,7 +144,7 @@
         </ul>
     }
 
-    @if(!(User.Identity.IsAuthenticated))
+    @if (!(User.Identity.IsAuthenticated))
     {
         <!--Navbar-->
 
@@ -153,31 +165,31 @@
                 {
                     foreach (var post in Model)
                     {
-                <div class="post-preview">
-                    <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                        <!--Searches for a particular post and returns its Details by Slug-->
-                        <!--<a href="post.html">-->
+                        <div class="post-preview">
+                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                                <!--Searches for a particular post and returns its Details by Slug-->
+                                <!--<a href="post.html">-->
 
-                        @if (@post.MediaURL != null)
-                        {
-                            <img class="img-responsive" src="@post.MediaURL" alt="image">
-                        }
+                                @if (@post.MediaURL != null)
+                                {
+                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
+                                }
 
-                        <h2 class="post-title"> @post.Title </h2>
-                        <h3 class="post-subtitle">
-                            @post.Abstract
-                        </h3>
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#">Kerry Peay's Blog</a>
-                        on September 24, 2017
-                    </p>
+                                <h2 class="post-title"> @post.Title </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Abstract
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#">Kerry Peay's Blog</a>
+                                on September 24, 2017
+                            </p>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
-                    @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
-                    @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
-                </div>
+                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                            @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+                        </div>
                         <hr>
                     }
                 }
@@ -221,14 +233,6 @@
     </div>
 
     <hr>
-
-    @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
-    {<div class="controls controls-row search-row">
-            <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
-            <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
-                <i class="icon-search"></i>
-            </button>
-        </div>}
 
     <!-- Footer -->
     <footer>
