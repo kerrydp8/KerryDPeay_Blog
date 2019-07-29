@@ -53,12 +53,12 @@ namespace KerryDPeay_Blog.Migrations
             //I need to create a few users that will eventually occupy the roles of either Admin or Moderator
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(u => u.Email == "JTwichell@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "JTwichell@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "JTwichell@mailinator.com",
-                    Email = "JTwichell@mailinator.com",
+                    UserName = "JTwichell@Mailinator.com",
+                    Email = "JTwichell@Mailinator.com",
                     FirstName = "Jason",
                     LastName = "Twichell",
                     DisplayName = "Twich"
