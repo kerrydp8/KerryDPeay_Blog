@@ -217,8 +217,6 @@ namespace KerryDPeay_Blog.Controllers
                         image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
                         blogPost.MediaURL = "/Uploads/" + fileName;
                     }
-
-
                 }
 
                 blogPost.Update = DateTimeOffset.Now;
