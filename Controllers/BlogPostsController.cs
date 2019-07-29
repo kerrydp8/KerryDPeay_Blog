@@ -53,6 +53,7 @@ namespace KerryDPeay_Blog.Controllers
             return result.OrderByDescending(p => p.Create);
         }
 
+        [AllowAnonymous]
         public ActionResult AllPosts()
         {
             return View(db.BlogPosts.Where(b => b.Published).ToList());

@@ -85,7 +85,7 @@
         </ul>
     }
 
-    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+    else if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
     {
         <!--Navbar-->
         <ul>
@@ -96,7 +96,7 @@
         </ul>
     }
 
-    @if (!(User.Identity.IsAuthenticated))
+    else if (!(User.Identity.IsAuthenticated))
     {
         <!--Navbar-->
 
