@@ -107,63 +107,63 @@
         </ul>
     }
 
-<div>
-    <!--<h4>BlogPost</h4>-->
-    <hr />
+    <div>
+        <!--<h4>BlogPost</h4>-->
+        <hr />
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.Slug)
-    @Html.HiddenFor(model => model.Create)
-    @Html.HiddenFor(model => model.MediaURL)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Slug)
+        @Html.HiddenFor(model => model.Create)
+        @Html.HiddenFor(model => model.MediaURL)
 
-<dl>
+        <dl>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.Abstract)
-    </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Abstract)
+            </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Abstract)
-    </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Abstract)
+            </dd>
 
-    <dd>
-        @Html.Raw(Model.Body)
-    </dd>
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.MediaURL)
-    </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.MediaURL)
-    </dd>
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.Published)
-    </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
+            </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Published)
-    </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Published)
+            </dd>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.Create)
-    </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Create)
-    </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.Update)
-    </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Update)
+            </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Update)
-    </dd>
-</dl>
-</div>
+            <dd>
+                @Html.DisplayFor(model => model.Update)
+            </dd>
+        </dl>
+    </div>
 </body>
 
 
@@ -190,6 +190,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Slug)
         @Html.Hidden("BlogPostId", Model.Id)
+
         <textarea name="CommentBody" placeholder="Add Comment..."></textarea>
 
         <button class="btn btn-primary" type="submit">Add</button>
@@ -232,7 +233,7 @@
         if (@comment.UpdateReason != null)
         {
             <div class="row">
-                @comment.UpdateReason
+                Update: @comment.UpdateReason
             </div>
         }
     }
@@ -271,4 +272,19 @@
     }
 
 }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#editor'
+        });
+    </script>
+}
+
 

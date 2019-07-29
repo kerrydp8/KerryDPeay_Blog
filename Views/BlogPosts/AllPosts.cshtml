@@ -107,18 +107,6 @@
     </div>
 </div>
 
-<br />
-
-@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
-{<div class="controls controls-row search-row">
-        <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
-        <button id="searchStr" name="searchStr" class="btn btn-primary" type="submit">
-            <i class="icon-search"></i>
-        </button>
-    </div>}
-
-<br />
-
 <body id="scale">
 
     @if (User.IsInRole("Admin"))
@@ -155,6 +143,16 @@
             <li><a href=@Url.Action("AllPosts", "BlogPosts")>Old Posts</a></li>
         </ul>
     }
+
+    <br />
+
+    @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+    {<div class="controls controls-row search-row">
+            <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search">
+            <button id="searchStr" name="searchStr" class="btn btn-primary" type="submit">
+                <i class="icon-search"></i>
+            </button>
+        </div>}
 
     <!-- Main Content -->
     <div class="container">

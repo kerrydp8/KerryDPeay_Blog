@@ -79,7 +79,7 @@
             <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
             <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
             <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>Old Posts</a></li>
             <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
         </ul>
     }
@@ -91,7 +91,7 @@
             <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
             <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
             <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>Old Posts</a></li>
         </ul>
     }
 
@@ -103,58 +103,67 @@
             <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
             <li><a href="@Url.Action("Login", "Account")">Login</a></li>
             <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+            <li><a href=@Url.Action("AllPosts", "BlogPosts")>Old Posts</a></li>
         </ul>
     }
 
-<div>
-    <!--<h4>BlogPost</h4>-->
-    <hr />
+    <div>
+        <!--<h4>BlogPost</h4>-->
+        <hr />
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.Slug)
-    @Html.HiddenFor(model => model.Create)
-    @Html.HiddenFor(model => model.MediaURL)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Slug)
+        @Html.HiddenFor(model => model.Create)
+        @Html.HiddenFor(model => model.MediaURL)
 
-    <dl>
-        <dd>
-            @Html.Raw(Model.Body)
-        </dd>
+        <dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Abstract)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Abstract)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
+            <dd>
+                @Html.Raw(Model.Body)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Create)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Create)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Update)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Published)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Update)
-        </dd>
-    </dl>
-</div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Update)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Update)
+            </dd>
+        </dl>
+    </div>
 </body>
 
 
@@ -181,6 +190,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Slug)
         @Html.Hidden("BlogPostId", Model.Id)
+
         <textarea name="CommentBody" placeholder="Add Comment..."></textarea>
 
         <button class="btn btn-primary" type="submit">Add</button>
@@ -223,7 +233,7 @@
         if (@comment.UpdateReason != null)
         {
             <div class="row">
-                @comment.UpdateReason
+                Update: @comment.UpdateReason
             </div>
         }
     }
@@ -262,4 +272,19 @@
     }
 
 }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#editor'
+        });
+    </script>
+}
+
 
