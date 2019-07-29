@@ -117,43 +117,52 @@
     @Html.HiddenFor(model => model.Create)
     @Html.HiddenFor(model => model.MediaURL)
 
-    <dl>
-        <dd>
-            @Html.Raw(Model.Body)
-        </dd>
+<dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Abstract)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Abstract)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
+    <dd>
+        @Html.Raw(Model.Body)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MediaURL)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Create)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.MediaURL)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Create)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Published)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Update)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Published)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Update)
-        </dd>
-    </dl>
+    <dt>
+        @Html.DisplayNameFor(model => model.Create)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Create)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Update)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Update)
+    </dd>
+</dl>
 </div>
 </body>
 
