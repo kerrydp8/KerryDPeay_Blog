@@ -70,7 +70,6 @@ namespace KerryDPeay_Blog.Migrations
             {
                 userManager.Create(new ApplicationUser
                 {
-
                     UserName = "kerrydp8@outlook.com",
                     Email = "kerrydp8@outlook.com",
                     FirstName = "Kerry",
