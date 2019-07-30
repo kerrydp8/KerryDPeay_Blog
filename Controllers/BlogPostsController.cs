@@ -204,19 +204,18 @@ namespace KerryDPeay_Blog.Controllers
 
                     if (db.BlogPosts.Any(p => p.Slug == newSlug))
                     {
-                        ModelState.AddModelError("Title", "The title must be unique");
+                        //ModelState.AddModelError("Title", "The title must be unique");
                         return View(blogPost);
                     }
 
-                    blogPost.Slug = newSlug;
-                    //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.
+                    blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.  
+                }
 
-                    if (ImageUploadValidator.IsWebFriendlyImage(image))
-                    {
-                        var fileName = Path.GetFileName(image.FileName);
-                        image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
-                        blogPost.MediaURL = "/Uploads/" + fileName;
-                    }
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    blogPost.MediaURL = "/Uploads/" + fileName;
                 }
 
                 blogPost.Update = DateTimeOffset.Now;
