@@ -461,7 +461,7 @@ namespace KerryDPeay_Blog.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "BlogPosts");
         }
 
         [HttpGet]
