@@ -205,7 +205,8 @@ namespace KerryDPeay_Blog.Controllers
                     if (db.BlogPosts.Any(p => p.Slug == newSlug))
                     {
                         //ModelState.AddModelError("Title", "The title must be unique");
-                        return View(blogPost);
+                        newSlug = blogPost.Slug;
+                        //return View(blogPost);
                     }
 
                     blogPost.Slug = newSlug; //The new slug, formed from the new title selected by the user becomes the current slug for the post, replacing the former one.  
