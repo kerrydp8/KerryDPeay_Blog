@@ -205,7 +205,7 @@ namespace KerryDPeay_Blog.Controllers
                     if (db.BlogPosts.Any(p => p.Slug == newSlug))
                     {
                         //ModelState.AddModelError("Title", "The title must be unique");
-                        newSlug = blogPost.Slug;
+                        blogPost.Slug = newSlug;
                         //return View(blogPost);
                     }
 

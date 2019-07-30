@@ -116,6 +116,7 @@
         @Html.HiddenFor(model => model.Slug)
         @Html.HiddenFor(model => model.Create)
         @Html.HiddenFor(model => model.MediaURL)
+        @Html.HiddenFor(model => model.Update)
 
         <dl>
             <dd>
@@ -266,7 +267,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
 
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
