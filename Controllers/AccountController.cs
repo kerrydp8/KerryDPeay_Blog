@@ -55,7 +55,6 @@ namespace KerryDPeay_Blog.Controllers
             }
         }
 
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -64,7 +63,6 @@ namespace KerryDPeay_Blog.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
