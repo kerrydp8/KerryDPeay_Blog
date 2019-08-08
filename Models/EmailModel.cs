@@ -10,10 +10,13 @@ namespace KerryDPeay_Blog.Models
     public class EmailModel
     {
         [Required, Display(Name = "Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FromName { get; set; }
         [Required, Display(Name = "Email"), EmailAddress]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FromEmail { get; set; }
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Subject { get; set; }
         [Required]
         [AllowHtml] //THIS IS NEEDED. Html must be allowed to use a RTE.
