@@ -188,9 +188,16 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input name="image" type="file" class="form-control" id="fileUpload" />
-            @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.MediaURL)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <input name="image" type="file" class="form-control" id="fileUpload" />
+                @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 
