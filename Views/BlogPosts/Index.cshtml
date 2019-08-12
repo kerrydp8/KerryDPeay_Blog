@@ -228,32 +228,48 @@
                 {
                     foreach (var post in Model)
                     {
-                        <div class="post-preview">
+            <div class="post-preview">
 
-                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                                <!--Searches for a particular post and returns its Details by Slug-->
-                                <!--<a href="post.html">-->
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
 
-                                @if (@post.MediaURL != null)
-                                {
-                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
-                                }
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
 
-                                <h2 class="post-title"> @post.Title </h2>
-                                <h3 class="post-subtitle">
-                                    @post.Abstract
-                                </h3>
-                            </a>
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
 
-                            <p class="post-meta">
-                                Posted by
-                                <a href="#">Kerry Peay's Blog</a>
-                                on @post.Create
-                            </p>
-                            @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
-                            @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
-                            @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
-                        </div>
+                @if (post.Update == null)
+                {
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">Kerry Peay's Blog</a>
+                        on @post.Create
+                    </p>
+                }
+
+                else
+                {
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">Kerry Peay's Blog</a>
+                        on @post.Update
+                    </p>
+                }
+
+
+
+
+                @Html.ActionLink("Edit", "Edit", new { id = post.Id }) <img src="https://static.thenounproject.com/png/8975-200.png" style="width:20px; height:20px" /> |
+                @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" /> |
+                @Html.ActionLink("Delete", "Delete", new { id = post.Id }) <img src="http://cdn.onlinewebfonts.com/svg/img_198571.png" style="width:20px; height:20px" /> |
+            </div>
                         <hr>
                     }
                 }

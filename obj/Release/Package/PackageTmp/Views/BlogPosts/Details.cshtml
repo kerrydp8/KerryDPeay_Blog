@@ -127,9 +127,12 @@
             @Html.DisplayNameFor(model => model.MediaURL)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
+        @if (User.IsInRole("Admin"))
+        {
+            <dd>
+                @Html.DisplayFor(model => model.MediaURL)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.Published)
