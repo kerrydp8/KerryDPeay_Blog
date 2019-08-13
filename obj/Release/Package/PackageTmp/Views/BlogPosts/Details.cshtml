@@ -56,10 +56,42 @@
                 li a:hover {
                     background-color: #111;
                 }
+
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://www.mkels.com/wp-content/uploads/2017/06/reasons-to-enhance-your-design-capabilities-with-some-coding-skills.jpg");
+            height: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+            .hero-text button {
+                border: none;
+                outline: 0;
+                display: inline-block;
+                padding: 10px 25px;
+                color: black;
+                background-color: #ddd;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .hero-text button:hover {
+                    background-color: #555;
+                    color: white;
+                }
     </style>
 </head>
-
-<h1 class="text-center"><u><b>@Model.Title</b></u></h1>
 
 <h3>@Model.Abstract</h3>
 
@@ -118,49 +150,49 @@
         @Html.HiddenFor(model => model.MediaURL)
         @Html.HiddenFor(model => model.Update)
 
-    <dl>
-        <dd>
-            @Html.Raw(Model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
-
-        @if (User.IsInRole("Admin"))
-        {
+        <dl>
             <dd>
-                @Html.DisplayFor(model => model.MediaURL)
+                @Html.Raw(Model.Body)
             </dd>
-        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Create)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Create)
-        </dd>
-
-        @if (Model.Update != null)
-        {
             <dt>
-                @Html.DisplayNameFor(model => model.Update)
+                @Html.DisplayNameFor(model => model.MediaURL)
+            </dt>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.MediaURL)
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Published)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Update)
+                @Html.DisplayFor(model => model.Published)
             </dd>
-        }
-    </dl>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Create)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
+
+            @if (Model.Update != null)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Update)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Update)
+                </dd>
+            }
+        </dl>
     </div>
 </body>
 

@@ -116,7 +116,7 @@
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
         }
-
+  
         .hero-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://www.mkels.com/wp-content/uploads/2017/06/reasons-to-enhance-your-design-capabilities-with-some-coding-skills.jpg");
             height: 50%;
@@ -278,32 +278,44 @@
                 {
                     foreach (var post in Model)
                     {
-                        <div class="post-preview">
+            <div class="post-preview">
 
-                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
-                                <!--Searches for a particular post and returns its Details by Slug-->
-                                <!--<a href="post.html">-->
+                <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug })">
+                    <!--Searches for a particular post and returns its Details by Slug-->
+                    <!--<a href="post.html">-->
 
-                                @if (@post.MediaURL != null)
-                                {
-                                    <img class="img-responsive" src="@post.MediaURL" alt="image">
-                                }
+                    @if (@post.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@post.MediaURL" alt="image">
+                    }
 
-                                <h2 class="post-title"> @post.Title </h2>
-                                <h3 class="post-subtitle">
-                                    @post.Abstract
-                                </h3>
-                            </a>
+                    <h2 class="post-title"> @post.Title </h2>
+                    <h3 class="post-subtitle">
+                        @post.Abstract
+                    </h3>
+                </a>
 
-                            <p class="post-meta">
-                                Posted by
-                                <a href="#">Kerry Peay's Blog</a>
-                                on September 24, 2017
-                            </p>
+                @if (post.Update == null)
+                {
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">Kerry Peay's Blog</a>
+                        on @post.Create
+                    </p>
+                }
 
-                            @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" />
+                else
+                {
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">Kerry Peay's Blog</a>
+                        on @post.Update
+                    </p>
+                }
 
-                        </div>
+                @Html.ActionLink("Details", "Details", new { Slug = post.Slug }) <img src="https://directmailout.com/wp-content/uploads/2018/05/list.png" style="width:20px; height:20px" />
+
+            </div>
                         <hr>
                     }
                 }
