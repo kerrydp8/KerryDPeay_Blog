@@ -48,7 +48,7 @@
             li a {
                 display: block;
                 color: white;
-                text-align: center;
+                text-align: center; 
                 padding: 14px 16px;
                 text-decoration: none;
             }
@@ -180,19 +180,23 @@
             </dd>
         }
 
-    <dt>
-            Published On<!--Html.DisplayNameFor(model => model.Create)-->
-    </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Create)
-        </dd>
-
-        @if (Model.Update != null)
+        @if (Model.Update == null)
         {
-    <dt>
-            Updated On<!--Html.DisplayNameFor(model => model.Update)-->
-    </dt>
+            <dt>
+                Published On<!--Html.DisplayNameFor(model => model.Create)-->
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Create)
+            </dd>
+        }
+
+
+        else
+        {
+            <dt>
+                Updated On<!--Html.DisplayNameFor(model => model.Update)-->
+            </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.Update)
@@ -261,7 +265,7 @@
 {
     <hr />
     <div class="row">
-        Posted by @comment.Author.Email on @comment.Created.ToString("MMMM d, yyyy")
+        Posted by @comment.Author.DisplayName on @comment.Created.ToString("MMMM d, yyyy")
     </div>
 
     if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))

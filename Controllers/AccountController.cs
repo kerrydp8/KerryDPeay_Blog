@@ -152,7 +152,7 @@ namespace KerryDPeay_Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email, DisplayName = model.DisplayName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -169,7 +169,7 @@ namespace KerryDPeay_Blog.Controllers
                     };
                     var svc = new PersonalEmail();
                     await svc.SendAsync(email);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "BlogPosts");
                 }
                 AddErrors(result);
             }
