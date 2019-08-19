@@ -48,7 +48,7 @@
             li a {
                 display: block;
                 color: white;
-                text-align: center; 
+                text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
             }
@@ -93,6 +93,41 @@
     </style>
 </head>
 
+@if (User.IsInRole("Admin"))
+{
+    <!--Navbar-->
+    <ul>
+        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+        <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+        <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
+    </ul>
+}
+
+@if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
+{
+    <!--Navbar-->
+    <ul>
+        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+        <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+    </ul>
+}
+
+@if (!(User.Identity.IsAuthenticated))
+{
+    <!--Navbar-->
+
+    <ul>
+        <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
+        <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+        <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
+        <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
+    </ul>
+}
+
 <h3>@Model.Abstract</h3>
 
 @if (Model.MediaURL != null)
@@ -103,41 +138,6 @@
 <!--<h2>Details</h2>-->
 
 <body id="scale">
-
-    @if (User.IsInRole("Admin"))
-    {
-        <!--Navbar-->
-        <ul>
-            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
-            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-            <li><a href=@Url.Action("Create", "BlogPosts")>Create Post</a></li>
-        </ul>
-    }
-
-    @if ((User.Identity.IsAuthenticated) && !(User.IsInRole("Admin")))
-    {
-        <!--Navbar-->
-        <ul>
-            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-            <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
-            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-        </ul>
-    }
-
-    @if (!(User.Identity.IsAuthenticated))
-    {
-        <!--Navbar-->
-
-        <ul>
-            <li><a class="active" href="@Url.Action("Index", "BlogPosts")">Home</a></li>
-            <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-            <li><a href="@Url.Action("Contact", "Home")">Contact Me</a></li>
-            <li><a href=@Url.Action("AllPosts", "BlogPosts")>All Posts</a></li>
-        </ul>
-    }
 
     <div>
         <!--<h4>BlogPost</h4>-->
@@ -150,59 +150,59 @@
         @Html.HiddenFor(model => model.MediaURL)
         @Html.HiddenFor(model => model.Update)
 
-    <dl>
-        <dd>
-            @Html.Raw(Model.Body)
-        </dd>
-
-        @if (User.IsInRole("Admin"))
-        {
-            <dt>
-                @Html.DisplayNameFor(model => model.MediaURL)
-            </dt>
-        }
-
-        @if (User.IsInRole("Admin"))
-        {
+        <dl>
             <dd>
-                @Html.DisplayFor(model => model.MediaURL)
+                @Html.Raw(Model.Body)
             </dd>
-        }
 
-        @if (User.IsInRole("Admin"))
-        {
-            <dt>
-                @Html.DisplayNameFor(model => model.Published)
-            </dt>
+            @if (User.IsInRole("Admin"))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.MediaURL)
+                </dt>
+            }
 
-            <dd>
-                @Html.DisplayFor(model => model.Published)
-            </dd>
-        }
+            @if (User.IsInRole("Admin"))
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.MediaURL)
+                </dd>
+            }
 
-        @if (Model.Update == null)
-        {
-            <dt>
-                Published On<!--Html.DisplayNameFor(model => model.Create)-->
-            </dt>
+            @if (User.IsInRole("Admin"))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Published)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Create)
-            </dd>
-        }
+                <dd>
+                    @Html.DisplayFor(model => model.Published)
+                </dd>
+            }
+
+            @if (Model.Update == null)
+            {
+                <dt>
+                    Published On<!--Html.DisplayNameFor(model => model.Create)-->
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Create)
+                </dd>
+            }
 
 
-        else
-        {
-            <dt>
-                Updated On<!--Html.DisplayNameFor(model => model.Update)-->
-            </dt>
+            else
+            {
+                <dt>
+                    Updated On<!--Html.DisplayNameFor(model => model.Update)-->
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Update)
-            </dd>
-        }
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Update)
+                </dd>
+            }
+        </dl>
     </div>
 </body>
 
@@ -217,9 +217,7 @@
     <button class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
 </p>
 
-
-
-
+<br />
 
 @*Conditionally render the Add Comment form*@
 @if (User.Identity.IsAuthenticated)
@@ -231,7 +229,7 @@
         @Html.HiddenFor(model => model.Slug)
         @Html.Hidden("BlogPostId", Model.Id)
 
-        <textarea name="CommentBody" placeholder="Add Comment..."></textarea>
+        <textarea name="CommentBody" placeholder="Add Comment..." rows="5" cols="100"></textarea>
 
         <button class="btn btn-primary" type="submit">Add</button>
     }
