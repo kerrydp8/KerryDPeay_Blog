@@ -129,7 +129,10 @@ namespace KerryDPeay_Blog.Models
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index", "BlogPosts");
+            //return RedirectToAction("Index", "BlogPosts");
+            string url = this.Request.UrlReferrer.AbsolutePath;
+
+            return Redirect(url); //This and the above lines of code redirect the user to the same page after deleting a comment.
         }
 
         protected override void Dispose(bool disposing)
