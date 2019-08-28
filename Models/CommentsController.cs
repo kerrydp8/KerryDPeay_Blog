@@ -57,7 +57,10 @@ namespace KerryDPeay_Blog.Models
             {
                 comment.Body = commentBody;
                 comment.AuthorId = User.Identity.GetUserId();
-                comment.Created = DateTimeOffset.Now;
+
+                var localDate = DateTime.UtcNow.AddHours(-4);
+
+                comment.Created = localDate;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "BlogPosts", new { slug = Slug });
@@ -96,7 +99,10 @@ namespace KerryDPeay_Blog.Models
             {
                 comment.Body = commentBody;
                 comment.UpdateReason = commentUR;
-                comment.Updated = DateTimeOffset.Now;
+
+                var localDate = DateTime.UtcNow.AddHours(-4);
+
+                comment.Updated = localDate;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "BlogPosts", new { slug = Slug });

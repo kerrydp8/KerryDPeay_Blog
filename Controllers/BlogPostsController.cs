@@ -152,9 +152,10 @@ namespace KerryDPeay_Blog.Controllers
                     blogPost.MediaURL = "/Uploads/" + fileName;
                 }
 
+                var localDate = DateTime.UtcNow.AddHours(-4);
 
                 blogPost.Slug = Slug; //Creates a new slug and stores it in a variable
-                blogPost.Create = DateTimeOffset.Now;//Stores the time in which the post is created. 
+                blogPost.Create = localDate;//Stores the time in which the post is created. 
                 //blogPost.Create = myTime;
                 db.BlogPosts.Add(blogPost); //Adds the current post to the collection of posts. 
                 db.SaveChanges();
@@ -220,7 +221,9 @@ namespace KerryDPeay_Blog.Controllers
                     blogPost.MediaURL = "/Uploads/" + fileName;
                 }
 
-                blogPost.Update = DateTimeOffset.Now;
+                var localDate = DateTime.UtcNow.AddHours(-4);
+
+                blogPost.Update = localDate;
                 db.Entry(blogPost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

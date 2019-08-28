@@ -259,69 +259,74 @@
 
 <br />
 
-@foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
-{
-    <hr />
-    <div class="row">
-        Posted by @comment.Author.DisplayName on @comment.Created.ToString("MMMM d, yyyy")
-    </div>
-
-    if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
-    {
-        if (@comment.UpdateReason != null)
+<div class="panel panel-default">
+    <div class="panel-body">
+        @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
         {
+            <hr />
             <div class="row">
-                Update: @comment.UpdateReason
+                Posted by @comment.Author.DisplayName on @comment.Created.ToString("MMMM d, yyyy")
             </div>
+
+            if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
+            {
+                if (@comment.UpdateReason != null)
+                {
+                    <div class="row">
+                        Update: @comment.UpdateReason
+                    </div>
+                }
+            }
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    @comment.Body
+                </div>
+            </div>
+
+
+
+            <hr />
+
+            if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
+            {
+                using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Slug)
+                    @Html.HiddenFor(model => comment.Id)
+                    @Html.HiddenFor(model => comment.AuthorId)
+                    @Html.HiddenFor(model => comment.Created)
+                    @Html.HiddenFor(model => comment.BlogPostId)
+                    @Html.HiddenFor(model => comment.UpdateReason)
+                    <textarea name="commentBody">@comment.Body</textarea>
+                    <textarea name="commentUR">@comment.UpdateReason</textarea>
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                }
+
+                using (Html.BeginForm("Delete", "Comments", new { id = comment.Id }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+
+            }
+
         }
-    }
-
-
-    <div class="row">
-        <div class="col-md-12">
-            @comment.Body
-        </div>
     </div>
+</div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-    <hr />
+            <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+            <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
 
-    if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
-    {
-        using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.Slug)
-            @Html.HiddenFor(model => comment.Id)
-            @Html.HiddenFor(model => comment.AuthorId)
-            @Html.HiddenFor(model => comment.Created)
-            @Html.HiddenFor(model => comment.BlogPostId)
-            @Html.HiddenFor(model => comment.UpdateReason)
-            <textarea name="commentBody">@comment.Body</textarea>
-            <textarea name="commentUR">@comment.UpdateReason</textarea>
-            <button class="btn btn-primary" type="submit">Edit</button>
+            <script type="text/javascript">
+                tinymce.init({
+                    selector: '#editor'
+                });
+            </script>
         }
-
-        using (Html.BeginForm("Delete", "Comments", new { id = comment.Id }))
-        {
-            @Html.AntiForgeryToken()
-            <input type="submit" value="Delete" class="btn btn-danger" />
-        }
-
-    }
-
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
-    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
-
-    <script type="text/javascript">
-        tinymce.init({
-            selector: '#editor'
-        });
-    </script>
-}
 
 
