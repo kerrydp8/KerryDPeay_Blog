@@ -50,7 +50,7 @@ namespace KerryDPeay_Blog.Controllers
                 result = db.BlogPosts.AsQueryable();
             }
 
-            return result.OrderByDescending(p => p.Create);
+            return result.OrderByDescending(p => p.Update);
         }
 
         [AllowAnonymous]
